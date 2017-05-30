@@ -1,3 +1,4 @@
+<!-- This is a *view* - HTML markup that defines the appearance of your UI -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +7,13 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<script type='text/javascript' src='js/knockout-3.4.2.js'></script>
+    <p>Your markers:</p>
+    <ul data-bind="foreach: markers">
+        <li data-bind="text: name, click: $parent.clickMarker"></li>
+    </ul>
+    <script type='text/javascript' src='js/lib/knockout-3.4.2.js'></script>
+    <script src='js/data.js'></script>
+    <script src='js/model.js'></script>
+    <script src='js/octopus.js'></script>
 </body>
 </html>
