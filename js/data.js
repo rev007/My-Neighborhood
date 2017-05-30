@@ -1,17 +1,29 @@
 var markersData = [
     {
-        name: 'beehive'
+        name: "darryn's house",
+        title: "darryn's house",
+        info: 'chloe lives here!',
+        location: {lat: 42.42643, lng: -71.67493}
     },
     {
-        name: 'lemonade stand'
+        name: 'beehive',
+        title: 'beehive',
+        info: 'docile honeybees',
+        location: {lat: 42.42643, lng: -71.67493}
     },
     {
-        name: 'pothole'
+        name: 'lemonade stand',
+        title: 'lemonade stand',
+        info: '100% pure sugar cane',
+        location: {lat: 42.42643, lng: -71.67493}
+    },
+    {
+        name: 'pothole',
+        title: 'pothole',
+        info: 'bent three wheels this season',
+        location: {lat: 42.42643, lng: -71.67493}
     }
 ]
-
-
-
 
 // var education = {
 //     "schools": [

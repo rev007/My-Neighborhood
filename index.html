@@ -4,13 +4,38 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
     <p>Your markers:</p>
     <ul data-bind="foreach: markers">
         <li data-bind="text: name, click: $parent.clickMarker"></li>
     </ul>
+    <h3>My Neighborhood</h3>
+    <div id="map"></div>
+    <script>
+        function initMap() {
+            var home = {lat: 42.42643, lng: -71.67493};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 18,
+                center: home
+            });
+            var marker = new google.maps.Marker({
+                position: home,
+                map: map,
+                title: "darryn's house"
+            });
+            var infowindow = new google.maps.InfoWindow({
+                content: "this is chloe's house!"
+            });
+            marker.addListener('click', function() {
+                infowindow.open(map, marker);
+            });
+        }
+    </script>
+    <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAdfPN1zBfjX-Xjav-aRIGbKYq2bCXWaqU&callback=initMap">
+    </script>
     <script type='text/javascript' src='js/lib/knockout-3.4.2.js'></script>
     <script src='js/data.js'></script>
     <script src='js/model.js'></script>
