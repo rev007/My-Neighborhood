@@ -1,11 +1,11 @@
 // your key=API_KEY is equal to AIzaSyAdfPN1zBfjX-Xjav-aRIGbKYq2bCXWaqU
 var map; // Google map canvas
 var markers = []; // data points from the model
-// var marker; // any marker
+var marker; // any marker
 var nbrInfos = []; // info windows for the markers
-// var nbrInfo; // any info window
+var nbrInfo; // any info window
 
-// This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
+// this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 var ViewModel = function() {
 
     var self = this;
@@ -13,10 +13,10 @@ var ViewModel = function() {
     this.nbrList = ko.observableArray([]);
 
     neighborhoodData.forEach(function(data){
-        self.nbrList.push(new Marker(data));
+        self.nbrList.push(new Marker(data)); // knockout requires an object (Marker)?
     });
 
-    // list view item is clicked
+    // when a list item is clicked do something
     this.clickNbrItem = function(nbrItem) {
         console.log('click!' + nbrItem.title);
         // TODO: make all list view items and markers normal then add highlights to the clicked item
@@ -29,9 +29,6 @@ ko.applyBindings(new ViewModel());
 
 // initialize the map
 function initMap() {
-
-    // var marker; // any marker
-    // var nbrInfo; // any info window
 
     // TODO: retrieve objects from your list view
     // TODO: match them to your markers in the map
@@ -46,9 +43,6 @@ function initMap() {
     // cycle through each object in the neighborhoodData model
     neighborhoodData.forEach(function(data){
 
-        // TODO: why does marker and nbrInfo have to be inside the forEach to work?
-        var marker; // any marker
-        var nbrInfo; // any info window
         var markerLat = parseFloat(data.location.lat);
         var markerLng = parseFloat(data.location.lng);
 
@@ -74,13 +68,17 @@ function initMap() {
         marker = markers[markers.length - 1];
         nbrInfo = nbrInfos[nbrInfos.length - 1];
 
-        // connect the info window to the marker and activate when marker is clicked
-        marker.addListener('click', function() {
-            nbrInfo.open(map, marker);
-        });
-
+        // attach the info window to the marker
+        attachMessage(marker, nbrInfo);
     });
 
+}
+
+// attaches an info window to a marker (courtesy of Google Maps API documentation)
+function attachMessage(marker, message) {
+    marker.addListener('click', function() {
+        message.open(marker.get(map), marker);
+    });
 }
 
 function search(target) {

@@ -1,4 +1,4 @@
-// marker model
+// marker constructor
 var Marker = function(data) {
     this.id = data.id;
     this.title = data.title;
@@ -8,7 +8,7 @@ var Marker = function(data) {
     this.map = data.map;
 }
 
-// info window model
+// info window constructor
 var NeighborhoodInfo = function(data) {
     this.content = data.info;
 }
