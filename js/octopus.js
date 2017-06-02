@@ -70,7 +70,17 @@ function initMap() {
 
         // attach the info window to the marker
         attachMessage(marker, nbrInfo);
-    });
+
+        attachBounce(marker);
+
+        // toggleBounce(marker);
+
+        // marker.addListener('click', function() {
+        //     bounce(marker);
+        // });
+
+
+        });
 
 }
 
@@ -79,6 +89,27 @@ function attachMessage(marker, message) {
     marker.addListener('click', function() {
         message.open(marker.get(map), marker);
     });
+}
+
+// adds bounce animation to a marker that activates on click (courtesy of Google Maps API documentation)
+// TODO: would be nice to understand how to add toggleBounce() here instead of duplicating
+function attachBounce(marker) {
+    marker.addListener('click', function() {
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
+        } else {
+            marker.setAnimation(google.maps.Animation.BOUNCE);
+        }
+    });
+}
+
+// turn bouncing marker animation on and off
+function toggleBounce(marker) {
+    if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+    } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+    }
 }
 
 function search(target) {
@@ -90,6 +121,8 @@ function search(target) {
 function highlightStuff(nbrItem) {
     console.log("highlight stuff called");
     // do something
+    marker = markers[nbrItem.id];
+    toggleBounce(marker);
 }
 
 

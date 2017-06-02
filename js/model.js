@@ -1,6 +1,6 @@
 var neighborhoodData = [
     {
-        "id": "1",
+        "id": "0",
         "title": "darryns house",
         "info": "chloe lives here too!",
         "location": {
@@ -11,7 +11,7 @@ var neighborhoodData = [
         "map": "null"
     },
     {
-        "id": "2",
+        "id": "1",
         "title": "beehive",
         "info": "docile honeybees",
         "location": {
@@ -22,7 +22,7 @@ var neighborhoodData = [
         "map": "null"
     },
     {
-        "id": "3",
+        "id": "2",
         "title": "lemonade stand",
         "info": "ice cold, 100% pure sugar cane lemonade!",
         "location": {
@@ -33,7 +33,7 @@ var neighborhoodData = [
         "map": "null"
     },
     {
-        "id": "4",
+        "id": "3",
         "title": "pothole",
         "info": "massive pothole (damaged three wheels this season)",
         "location": {
@@ -44,7 +44,7 @@ var neighborhoodData = [
         "map": "null"
     },
     {
-        "id": "5",
+        "id": "4",
         "title": "blueberry bush",
         "info": "free wild blueberries are growing here",
         "location": {
