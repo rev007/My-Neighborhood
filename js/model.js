@@ -2,7 +2,7 @@ var neighborhoodData = [
     {
         "id": "1",
         "title": "darryns house",
-        "info": "chloe lives here!",
+        "info": "chloe lives here too!",
         "location": {
             "lat": "42.42643",
             "lng": "-71.67493"
@@ -35,7 +35,7 @@ var neighborhoodData = [
     {
         "id": "4",
         "title": "pothole",
-        "info": "damaged three wheels this season",
+        "info": "massive pothole (damaged three wheels this season)",
         "location": {
             "lat": "42.42513",
             "lng": "-71.67620"
