@@ -103,6 +103,10 @@ function attachBounce(marker) {
     });
 }
 
+function toggleMessage(marker) {
+    message.open(marker.get(map), marker);
+}
+
 // turn bouncing marker animation on and off
 function toggleBounce(marker) {
     if (marker.getAnimation() !== null) {
@@ -123,6 +127,10 @@ function highlightStuff(nbrItem) {
     // do something
     marker = markers[nbrItem.id];
     toggleBounce(marker);
+    nbrInfo = nbrInfos[nbrItem.id];
+    // nbrInfo.open(map, marker);
+    nbrInfo.open(map, marker);
+
 }
 
 
