@@ -9,7 +9,7 @@
 <body>
     <p>Your markers:</p>
     <ul data-bind="foreach: nbrList">
-        <li data-bind="text: title, click: $parent.clickNbrItem"></li>
+        <li data-bind="text: title, visible: list, click: $parent.clickNbrItem"></li>
     </ul>
     <h3>My Neighborhood</h3>
     <div id="map"></div>

@@ -8,6 +8,7 @@ var nbrInfo; // any info window
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 var ViewModel = function() {
 
+    // data
     var self = this;
 
     this.nbrList = ko.observableArray([]);
@@ -16,10 +17,11 @@ var ViewModel = function() {
         self.nbrList.push(new Marker(data)); // knockout requires an object (Marker)?
     });
 
+    // behaviours
     // when a list item is clicked do something
     this.clickNbrItem = function(nbrItem) {
         console.log('click!' + nbrItem.title);
-        // TODO: make all list view items and markers normal then add highlights to the clicked item
+        // TODO: make all list view items and markers normal then add highlight to the clicked item
         highlightStuff(nbrItem);
     }
 
