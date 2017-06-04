@@ -4,7 +4,7 @@ var Marker = function(data) {
     this.title = data.title;
     this.info = data.info;
     this.location = data.location;
-    this.list = data.list;
+    this.list = ko.observable(JSON.parse(data.list)); // parses and converts into an object corresponding to the given text
     this.map = data.map;
 }
 

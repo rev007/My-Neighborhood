@@ -6,12 +6,12 @@ var nbrInfos = []; // info windows for the markers
 var nbrInfo; // any info window
 
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
-var ViewModel = function() {
+var nbrListViewModel = function() {
 
     // data
     var self = this;
 
-    this.nbrList = ko.observableArray([]);
+    self.nbrList = ko.observableArray();
 
     neighborhoodData.forEach(function(data){
         self.nbrList.push(new Marker(data)); // knockout requires an object (Marker)?
@@ -19,15 +19,15 @@ var ViewModel = function() {
 
     // behaviours
     // when a list item is clicked do something
-    this.clickNbrItem = function(nbrItem) {
+    self.clickNbrItem = function(nbrItem) {
         console.log('click!' + nbrItem.title);
         // TODO: make all list view items and markers normal then add highlight to the clicked item
-        highlightStuff(nbrItem);
+        itemClicked(nbrItem);
     }
 
 };
 
-ko.applyBindings(new ViewModel());
+ko.applyBindings(new nbrListViewModel());
 
 // initialize the map
 function initMap() {
@@ -86,14 +86,14 @@ function initMap() {
 
 }
 
-// attaches an info window to a marker (courtesy of Google Maps API documentation)
+// attach an info window to a marker (courtesy of Google Maps API documentation)
 function attachMessage(marker, message) {
     marker.addListener('click', function() {
         message.open(marker.get(map), marker);
     });
 }
 
-// adds bounce animation to a marker that activates on click (courtesy of Google Maps API documentation)
+// add bounce animation to a marker that activates on click (courtesy of Google Maps API documentation)
 // TODO: would be nice to understand how to add toggleBounce() here instead of duplicating
 function attachBounce(marker) {
     marker.addListener('click', function() {
@@ -105,6 +105,7 @@ function attachBounce(marker) {
     });
 }
 
+// open the marker's info window
 function toggleMessage(marker) {
     message.open(marker.get(map), marker);
 }
@@ -123,15 +124,20 @@ function search(target) {
     // TODO: change markers to match
 }
 
-// highlight clicked item
-function highlightStuff(nbrItem) {
+// clicked item
+function itemClicked(nbrItem) {
     console.log("highlight stuff called");
     // do something
     marker = markers[nbrItem.id];
-    toggleBounce(marker);
     nbrInfo = nbrInfos[nbrItem.id];
-    // nbrInfo.open(map, marker);
+
+    toggleBounce(marker);
     nbrInfo.open(map, marker);
+    console.log(nbrItem);
+    console.log(nbrItem.list());
+    nbrItem.list(false);
+    console.log(nbrItem.list());
+
 
 }
 
