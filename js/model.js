@@ -1,3 +1,4 @@
+// TODO: put this on the server and load it in
 var neighborhoodData = [
     {
         "id": "0",

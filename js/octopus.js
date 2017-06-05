@@ -9,21 +9,38 @@ var nbrInfo; // any info window
 var nbrListViewModel = function() {
 
     // data
+
     var self = this;
-
     self.nbrList = ko.observableArray();
+    self.nbrMarkerSearch = ko.observable();
 
+    // add each marker from the model to the observable array
     neighborhoodData.forEach(function(data){
         self.nbrList.push(new Marker(data)); // knockout requires an object (Marker)?
     });
 
     // behaviours
+
     // when a list item is clicked do something
     self.clickNbrItem = function(nbrItem) {
         console.log('click!' + nbrItem.title);
         // TODO: make all list view items and markers normal then add highlight to the clicked item
         itemClicked(nbrItem);
     }
+
+    // search markers (courtesy of a combination of Knockout documentation and Stack Overflow)
+    self.nbrMarkerSearch.subscribe(function (newValue) {
+        console.log("character entered");
+        console.log(newValue);
+    });
+
+    // filter markers (courtesy of Knockout documentation)
+    self.filterMarkers = function() {
+        // self.tasks.push(new Task({ title: this.nbrMarkerFilter() }));
+        console.log(self.nbrMarkerFilter);
+        self.nbrMarkerFilter("");
+    };
+    self.removeTask = function(task) { self.tasks.remove(task) };
 
 };
 

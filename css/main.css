@@ -9,13 +9,16 @@ html, body {
 }
 
 /*********************
-MAP
+SEARCH BOX
 *********************/
 
-#map {
-    height: 90%;
-    width: 100%;
-    background-color: grey;
+input {
+    min-height: 20px;
+    background-image: url('../img/search.svg');
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    padding: 0 0 0 30px;
+    margin-bottom: 10px;
 }
 
 /*********************
@@ -24,5 +27,15 @@ LIST
 
 ul {
     height: 10%;
+}
+
+/*********************
+MAP
+*********************/
+
+#map {
+    height: 90%;
+    width: 100%;
+    background-color: grey;
 }
 
