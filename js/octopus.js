@@ -5,8 +5,10 @@ var marker; // any marker
 var nbrInfos = []; // info windows for the markers
 var nbrInfo; // any info window
 var element; // binds a view model to a particular element on the page
+var notify = new ko.subscribable(); // allows the search view model to notify the list view model of a change
 
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
+// this view model watches the search box
 var nbrSearchViewModel = function() {
 
     // data
@@ -16,25 +18,28 @@ var nbrSearchViewModel = function() {
 
     // behaviours
 
-    // search input (subsribe property and textInput courtesy of both Knockout documentation and Stack Overflow)
-    self.nbrMarkerSearch.subscribe(function (newValue) {
+    // search input (subscribe property and textInput courtesy of both Knockout documentation and Stack Overflow)
+    self.nbrMarkerSearch.subscribe(function (newValue) { // had to subscribe to get instant updates from textInput?
+        // let the list view model know the search box has changed
+        notify.notifySubscribers(newValue, "searchBoxChanged");
+        // TODO: get rid of this if you don't end up using it
         // search for markers that match newValue
-        search(newValue);
+        // search(newValue);
     });
 
 };
 
-element = document.getElementById('search');
+element = document.getElementById('search'); // only views the DOM associated with an id named 'search'
 ko.applyBindings(new nbrSearchViewModel(), element);
 
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
+// this view model watches the list item box
 var nbrListViewModel = function() {
 
     // data
 
     var self = this;
     self.nbrList = ko.observableArray();
-    // self.nbrMarkerSearch = ko.observable();
 
     // add each marker from the model to the observable array
     neighborhoodData.forEach(function(data){
@@ -45,22 +50,19 @@ var nbrListViewModel = function() {
 
     // when a list item is clicked do something
     self.clickNbrItem = function(nbrItem) {
-        console.log('click!' + nbrItem.title);
         // TODO: make all list view items and markers normal then add highlight to the clicked item
         itemClicked(nbrItem);
     }
 
-    // filter markers (courtesy of Knockout documentation)
-    self.filterMarkers = function() {
-        // self.tasks.push(new Task({ title: this.nbrMarkerFilter() }));
-        console.log(self.nbrMarkerFilter);
-        self.nbrMarkerFilter("");
-    };
-    self.removeTask = function(task) { self.tasks.remove(task) };
+    // receives a notification from the search view model when the search box changes
+    notify.subscribe(function(newValue) {
+        console.log("i can see " + newValue);
+        search(newValue, self.nbrList);
+    }, this, "searchBoxChanged");
 
 };
 
-element = document.getElementById('list');
+element = document.getElementById('list'); // only views the DOM associated with an id named 'list'
 ko.applyBindings(new nbrListViewModel(), element);
 
 // initialize the map
@@ -146,15 +148,7 @@ function toggleBounce(marker) {
     }
 }
 
-function search(target) {
-    // TODO: change list view to match
-    // TODO: change markers to match
-
-    console.log("search fcn called");
-    console.log(target);
-}
-
-// clicked item
+// mouse clicked a list item
 function itemClicked(nbrItem) {
     console.log("highlight stuff called");
     // do something
@@ -168,6 +162,16 @@ function itemClicked(nbrItem) {
     nbrItem.list(false);
     console.log(nbrItem.list());
 }
+
+function search(target, list) {
+    // TODO: change list view to match
+    // TODO: change markers to match
+
+    console.log("search fcn called");
+    // list[4].
+    // console.log(target);
+}
+
 
 
 
