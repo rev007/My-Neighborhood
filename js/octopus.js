@@ -16,10 +16,10 @@ var nbrSearchViewModel = function() {
 
     // behaviours
 
-    // search markers (courtesy of a combination of Knockout documentation and Stack Overflow)
+    // search input (subsribe property and textInput courtesy of both Knockout documentation and Stack Overflow)
     self.nbrMarkerSearch.subscribe(function (newValue) {
-        console.log("character entered");
-        console.log(newValue);
+        // search for markers that match newValue
+        search(newValue);
     });
 
 };
@@ -109,14 +109,7 @@ function initMap() {
 
         attachBounce(marker);
 
-        // toggleBounce(marker);
-
-        // marker.addListener('click', function() {
-        //     bounce(marker);
-        // });
-
-
-        });
+    });
 
 }
 
@@ -156,6 +149,9 @@ function toggleBounce(marker) {
 function search(target) {
     // TODO: change list view to match
     // TODO: change markers to match
+
+    console.log("search fcn called");
+    console.log(target);
 }
 
 // clicked item
@@ -171,8 +167,6 @@ function itemClicked(nbrItem) {
     console.log(nbrItem.list());
     nbrItem.list(false);
     console.log(nbrItem.list());
-
-
 }
 
 
