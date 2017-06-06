@@ -7,13 +7,13 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <form>
+    <form id="search">
         <!-- type in search word to filter list of markers -->
         <input data-bind="textInput: nbrMarkerSearch" placeholder="Search for markers..." />
     </form>
     <p>Your markers:</p>
     <!-- display each visible marker from the list -->
-    <ul data-bind="foreach: nbrList">
+    <ul id="list" data-bind="foreach: nbrList">
         <li data-bind="text: title, visible: list, click: $parent.clickNbrItem"></li>
     </ul>
     <h3>My Neighborhood</h3>

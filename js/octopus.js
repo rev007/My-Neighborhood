@@ -4,6 +4,28 @@ var markers = []; // data points from the model
 var marker; // any marker
 var nbrInfos = []; // info windows for the markers
 var nbrInfo; // any info window
+var element; // binds a view model to a particular element on the page
+
+// this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
+var nbrSearchViewModel = function() {
+
+    // data
+
+    var self = this;
+    self.nbrMarkerSearch = ko.observable();
+
+    // behaviours
+
+    // search markers (courtesy of a combination of Knockout documentation and Stack Overflow)
+    self.nbrMarkerSearch.subscribe(function (newValue) {
+        console.log("character entered");
+        console.log(newValue);
+    });
+
+};
+
+element = document.getElementById('search');
+ko.applyBindings(new nbrSearchViewModel(), element);
 
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 var nbrListViewModel = function() {
@@ -12,7 +34,7 @@ var nbrListViewModel = function() {
 
     var self = this;
     self.nbrList = ko.observableArray();
-    self.nbrMarkerSearch = ko.observable();
+    // self.nbrMarkerSearch = ko.observable();
 
     // add each marker from the model to the observable array
     neighborhoodData.forEach(function(data){
@@ -28,12 +50,6 @@ var nbrListViewModel = function() {
         itemClicked(nbrItem);
     }
 
-    // search markers (courtesy of a combination of Knockout documentation and Stack Overflow)
-    self.nbrMarkerSearch.subscribe(function (newValue) {
-        console.log("character entered");
-        console.log(newValue);
-    });
-
     // filter markers (courtesy of Knockout documentation)
     self.filterMarkers = function() {
         // self.tasks.push(new Task({ title: this.nbrMarkerFilter() }));
@@ -44,7 +60,8 @@ var nbrListViewModel = function() {
 
 };
 
-ko.applyBindings(new nbrListViewModel());
+element = document.getElementById('list');
+ko.applyBindings(new nbrListViewModel(), element);
 
 // initialize the map
 function initMap() {
