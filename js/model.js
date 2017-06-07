@@ -8,7 +8,7 @@ var neighborhoodData = [
             "lat": "42.42643",
             "lng": "-71.67493"
         },
-        "list": "true",
+        "show": "true",
         "map": "null"
     },
     {
@@ -19,7 +19,7 @@ var neighborhoodData = [
             "lat": "42.42516",
             "lng": "-71.67385"
         },
-        "list": "true",
+        "show": "true",
         "map": "null"
     },
     {
@@ -30,7 +30,7 @@ var neighborhoodData = [
             "lat": "42.42668",
             "lng": "-71.67411"
         },
-        "list": "true",
+        "show": "true",
         "map": "null"
     },
     {
@@ -41,7 +41,7 @@ var neighborhoodData = [
             "lat": "42.42513",
             "lng": "-71.67620"
         },
-        "list": "true",
+        "show": "true",
         "map": "null"
     },
     {
@@ -52,7 +52,7 @@ var neighborhoodData = [
             "lat": "42.42660",
             "lng": "-71.67540"
         },
-        "list": "true",
+        "show": "true",
         "map": "null"
     }
 ];

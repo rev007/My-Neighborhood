@@ -57,7 +57,7 @@ var nbrListViewModel = function() {
     // receives a notification from the search view model when the search box changes
     notify.subscribe(function(newValue) {
         console.log("i can see " + newValue);
-        search(newValue, self.nbrList);
+        search(newValue, self.nbrList());
     }, this, "searchBoxChanged");
 
 };
@@ -158,18 +158,26 @@ function itemClicked(nbrItem) {
     toggleBounce(marker);
     nbrInfo.open(map, marker);
     console.log(nbrItem);
-    console.log(nbrItem.list());
-    nbrItem.list(false);
-    console.log(nbrItem.list());
+    console.log(nbrItem.show());
+    nbrItem.show(false);
+    console.log(nbrItem.show());
 }
 
+// change the show property of the list item based on the search target
 function search(target, list) {
     // TODO: change list view to match
     // TODO: change markers to match
 
-    console.log("search fcn called");
-    // list[4].
-    // console.log(target);
+    list.forEach(function(nbrItem){
+        var n = nbrItem.title.search(target);
+        if (n >= 0) {
+            console.log("found search in " + nbrItem.title);
+            nbrItem.show(true);
+        } else {
+            nbrItem.show(false);
+        };
+    });
+
 }
 
 

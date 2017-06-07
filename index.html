@@ -14,7 +14,7 @@
     <p>Your markers:</p>
     <!-- display each visible marker from the list -->
     <ul id="list" data-bind="foreach: nbrList">
-        <li data-bind="text: title, visible: list, click: $parent.clickNbrItem"></li>
+        <li data-bind="text: title, visible: show, click: $parent.clickNbrItem"></li>
     </ul>
     <h3>My Neighborhood</h3>
     <div id="map"></div>
