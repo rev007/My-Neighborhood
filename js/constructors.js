@@ -5,7 +5,6 @@ var Marker = function(data) {
     this.info = data.info;
     this.location = data.location;
     this.show = ko.observable(JSON.parse(data.show)); // parses and converts into an object corresponding to the given text
-    this.map = data.map;
 }
 
 // info window constructor

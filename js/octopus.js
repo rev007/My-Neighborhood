@@ -6,6 +6,7 @@ var nbrInfos = []; // info windows for the markers
 var nbrInfo; // any info window
 var element; // binds a view model to a particular element on the page
 var notify = new ko.subscribable(); // allows the search view model to notify the list view model of a change
+var n; // some number
 
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 // this view model watches the search box
@@ -18,18 +19,15 @@ var nbrSearchViewModel = function() {
 
     // behaviours
 
-    // search input (subscribe property and textInput courtesy of both Knockout documentation and Stack Overflow)
+    // watch the search box with instant updates (subscribe property and textInput courtesy of both Knockout documentation and Stack Overflow)
     self.nbrMarkerSearch.subscribe(function (newValue) { // had to subscribe to get instant updates from textInput?
         // let the list view model know the search box has changed
         notify.notifySubscribers(newValue, "searchBoxChanged");
-        // TODO: get rid of this if you don't end up using it
-        // search for markers that match newValue
-        // search(newValue);
     });
 
 };
 
-element = document.getElementById('search'); // only views the DOM associated with an id named 'search'
+element = document.getElementById('search'); // we only want to view the DOM associated with an id named 'search'
 ko.applyBindings(new nbrSearchViewModel(), element);
 
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
@@ -48,7 +46,7 @@ var nbrListViewModel = function() {
 
     // behaviours
 
-    // when a list item is clicked do something
+    // when a list item is mouse clicked do something
     self.clickNbrItem = function(nbrItem) {
         // TODO: make all list view items and markers normal then add highlight to the clicked item
         itemClicked(nbrItem);
@@ -62,15 +60,11 @@ var nbrListViewModel = function() {
 
 };
 
-element = document.getElementById('list'); // only views the DOM associated with an id named 'list'
+element = document.getElementById('list'); // we only want to view the DOM associated with an id named 'list'
 ko.applyBindings(new nbrListViewModel(), element);
 
 // initialize the map
 function initMap() {
-
-    // TODO: retrieve objects from your list view
-    // TODO: match them to your markers in the map
-    // TODO: no match? turn it off
 
     var neighborhood = {lat: 42.42600, lng: -71.67493};
     map = new google.maps.Map(document.getElementById('map'), {
@@ -94,7 +88,7 @@ function initMap() {
             })
         );
 
-        // TODO: not sure if this array will be useful later, but making it anyway
+        // TODO: is nbrInfos array needed? examine this code later
         // create an info window for each object
         nbrInfos.push(
             new google.maps.InfoWindow({
@@ -109,6 +103,7 @@ function initMap() {
         // attach the info window to the marker
         attachMessage(marker, nbrInfo);
 
+        // attach a bounce animation to the marker
         attachBounce(marker);
 
     });
@@ -122,7 +117,7 @@ function attachMessage(marker, message) {
     });
 }
 
-// add bounce animation to a marker that activates on click (courtesy of Google Maps API documentation)
+// add bounce animation to a marker that activates on mouse click (courtesy of Google Maps API documentation)
 // TODO: would be nice to understand how to add toggleBounce() here instead of duplicating
 function attachBounce(marker) {
     marker.addListener('click', function() {
@@ -134,7 +129,7 @@ function attachBounce(marker) {
     });
 }
 
-// open the marker's info window
+// open the marker's info window after a mouse click
 function toggleMessage(marker) {
     message.open(marker.get(map), marker);
 }
@@ -146,9 +141,10 @@ function toggleBounce(marker) {
     } else {
         marker.setAnimation(google.maps.Animation.BOUNCE);
     }
+
 }
 
-// mouse clicked a list item
+// mouse clicked a list item... do stuff here
 function itemClicked(nbrItem) {
     console.log("highlight stuff called");
     // do something
@@ -157,28 +153,25 @@ function itemClicked(nbrItem) {
 
     toggleBounce(marker);
     nbrInfo.open(map, marker);
-    console.log(nbrItem);
-    console.log(nbrItem.show());
-    nbrItem.show(false);
-    console.log(nbrItem.show());
+
 }
 
-// change the show property of the list item based on the search target
+// turn list items and map markers on and off based on the search target
 function search(target, list) {
-    // TODO: change list view to match
-    // TODO: change markers to match
 
     list.forEach(function(nbrItem){
-        var n = nbrItem.title.search(target);
+        n = nbrItem.title.search(target); // search for the target string inside the nbrItem title string
         if (n >= 0) {
+            // turn on the list item and marker
             console.log("found search in " + nbrItem.title);
             nbrItem.show(true);
+            markers[nbrItem.id].setMap(map);
         } else {
+            // turn off the list item and marker
             nbrItem.show(false);
+            markers[nbrItem.id].setMap(null);
         };
     });
-
-    markers[0].setMap(null);
 
 }
 
