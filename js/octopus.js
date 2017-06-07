@@ -178,6 +178,8 @@ function search(target, list) {
         };
     });
 
+    markers[0].setMap(null);
+
 }
 
 
