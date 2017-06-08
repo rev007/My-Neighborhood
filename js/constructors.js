@@ -11,3 +11,15 @@ var Marker = function(data) {
 var NeighborhoodInfo = function(data) {
     this.content = data.info;
 }
+
+// photo constructor
+var Photo = function(data) {
+    // this.url = '<img src="'+data.data[x].images.low_resolution.url+'">';
+    this.url = '<img src="'+data.images.low_resolution.url+'">';
+    this.caption = data.caption.text;
+    console.log(this.caption);
+
+    // $('ul').append('<li><img src="'+data.data[x].images.low_resolution.url+'"></li>'); // data.data[x].images.low_resolution.url - URL of image, 306х306
+
+
+}

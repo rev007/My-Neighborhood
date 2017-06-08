@@ -8,6 +8,7 @@ var nbrInfo; // any info window
 var element; // binds a view model to a particular element on the page
 var notify = new ko.subscribable(); // allows the search view model to notify the list view model of a change
 var n; // some number
+var nbrPhotos = []; // images from Instagram
 
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 // this view model watches the search box
@@ -94,7 +95,7 @@ function initMap() {
         nbrInfos.push(
             new google.maps.InfoWindow({
                 // content: data.info
-                content: '<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100" >' + data.info
+                // content: '<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100" >' + data.info
             })
         );
 
@@ -177,8 +178,8 @@ function search(target, list) {
 
 }
 
-// get images from Instagram (courtesy of Misha Rudrastyh blog)
-function nbrImages() {
+// get photos from Instagram (courtesy of Misha Rudrastyh blog)
+function getNbrPhotos() {
     $.ajax({
         url: 'https://api.instagram.com/v1/users/self/media/recent', // no need for a user id when using a sandbox app
         dataType: 'jsonp',
@@ -187,8 +188,21 @@ function nbrImages() {
         success: function(data){
             console.log(data);
             for( x in data.data ){
-                $('ul').append('<li><img src="'+data.data[x].images.low_resolution.url+'"></li>'); // data.data[x].images.low_resolution.url - URL of image, 306х306
+                // $('ul').append('<li><img src="'+data.data[x].images.low_resolution.url+'"></li>'); // data.data[x].images.low_resolution.url - URL of image, 306х306
                 console.log(data.data[x].caption.text);
+                // nbrInfos[0].content = '<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100" >' + data.info;
+                // nbrInfos[0].setContent('pizza');
+                // nbrInfos[0].setContent('<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100">');
+                // nbrInfos[0].setContent('<img src="'+data.data[x].images.low_resolution.url+'">');
+
+                // nbrPhotos.push('<img src="' + data.data[x].images.low_resolution.url + '>');
+
+                nbrPhotos.push(new Photo(data.data[x]));
+
+
+
+
+
             }
         },
         error: function(data){
@@ -198,7 +212,6 @@ function nbrImages() {
 
 }
 
-nbrImages();
 
 
 
