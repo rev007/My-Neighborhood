@@ -1,4 +1,5 @@
-// your key=API_KEY is equal to AIzaSyAdfPN1zBfjX-Xjav-aRIGbKYq2bCXWaqU
+// your key=API_KEY is equal to AIzaSyAdfPN1zBfjX-Xjav-aRIGbKYq2bCXWaqU... for Google Map
+var instagramToken = '1285024802.e38f0d6.1eb75e601b7e4392937accc250af8008';
 var map; // Google map canvas
 var markers = []; // data points from the model
 var marker; // any marker
@@ -92,7 +93,8 @@ function initMap() {
         // create an info window for each object
         nbrInfos.push(
             new google.maps.InfoWindow({
-                content: data.info
+                // content: data.info
+                content: '<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100" >' + data.info
             })
         );
 
@@ -174,6 +176,32 @@ function search(target, list) {
     });
 
 }
+
+// get images from Instagram (courtesy of Misha Rudrastyh blog)
+function nbrImages() {
+    $.ajax({
+        url: 'https://api.instagram.com/v1/users/self/media/recent', // no need for a user id when using a sandbox app
+        dataType: 'jsonp',
+        type: 'GET',
+        data: {access_token: instagramToken},
+        success: function(data){
+            console.log(data);
+            for( x in data.data ){
+                $('ul').append('<li><img src="'+data.data[x].images.low_resolution.url+'"></li>'); // data.data[x].images.low_resolution.url - URL of image, 306х306
+                console.log(data.data[x].caption.text);
+            }
+        },
+        error: function(data){
+            console.log(data); // send the error notifications to console
+        }
+    });
+
+}
+
+nbrImages();
+
+
+
 
 
 
