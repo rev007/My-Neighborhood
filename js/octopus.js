@@ -44,7 +44,7 @@ var nbrListViewModel = function() {
 
     // add each marker from the model to the observable array
     neighborhoodData.forEach(function(data){
-        self.nbrList.push(new Marker(data)); // knockout requires an object (Marker)?
+        self.nbrList.push(new nbrData(data)); // knockout requires an object (nbrData)?
     });
 
     // behaviours

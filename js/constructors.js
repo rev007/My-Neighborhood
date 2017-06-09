@@ -1,5 +1,5 @@
 // marker constructor
-var Marker = function(data) {
+var nbrData = function(data) {
     this.id = data.id;
     this.title = data.title;
     this.info = data.info;
