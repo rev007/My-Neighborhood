@@ -69,9 +69,6 @@ ko.applyBindings(new nbrListViewModel(), element);
 // initialize the map
 function initMap() {
 
-    var markerLat;
-    var markerLng;
-
     console.log('initMap start and nbrPhotos length = ' + nbrPhotos.length);
 
     var neighborhood = {lat: 42.42600, lng: -71.67493};
@@ -83,8 +80,8 @@ function initMap() {
     // cycle through each object in the neighborhoodData model
     neighborhoodData.forEach(function(data){
 
-        markerLat = parseFloat(data.location.lat);
-        markerLng = parseFloat(data.location.lng);
+        var markerLat = parseFloat(data.location.lat);
+        var markerLng = parseFloat(data.location.lng);
 
         // create a marker for each object
         markers.push(
@@ -161,7 +158,6 @@ function itemClicked(nbrItem) {
     console.log("highlight stuff called");
     // do something
     marker = markers[nbrItem.id];
-    console.log(marker);
     nbrInfo = nbrInfos[nbrItem.id];
 
     toggleBounce(marker);
@@ -218,20 +214,18 @@ console.log('ajax photos block complete and nbrPhotos length = ' + nbrPhotos.len
 //     timeoutID = window.setTimeout(addPhotos, 0000);
 // }
 
-// add photos to each marker's info window
+// add Instagram photos to each marker's InfoWindow
 function addPhotosToInfoWindows() {
     n = 0;
-    var key;
     nbrInfos.forEach(function(data){
         // content: data.info
         // data.setContent('<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100">' + 'data.info');
         // content: nbrPhotos[n].caption;
-        key = data.content;
-        console.log(key);
         if (n < nbrPhotos.length) {
             data.setContent(nbrPhotos[n].url);
             n++;
         }
+        console.log('photo in array');
     });
 }
 

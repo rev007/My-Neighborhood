@@ -1,7 +1,7 @@
 // TODO: put this on the server and load it in
 var neighborhoodData = [
     {
-        "id": "home",
+        "id": "0",
         "title": "darryns house",
         "info": "chloe lives here too!",
         "location": {
@@ -11,7 +11,7 @@ var neighborhoodData = [
         "show": "true"
     },
     {
-        "id": "nest",
+        "id": "1",
         "title": "beehive",
         "info": "docile honeybees",
         "location": {
@@ -21,7 +21,7 @@ var neighborhoodData = [
         "show": "true"
     },
     {
-        "id": "lemonade",
+        "id": "2",
         "title": "lemonade stand",
         "info": "ice cold, 100% pure sugar cane lemonade!",
         "location": {
@@ -31,7 +31,7 @@ var neighborhoodData = [
         "show": "true"
     },
     {
-        "id": "pothole",
+        "id": "3",
         "title": "pothole",
         "info": "massive pothole (damaged three wheels this season)",
         "location": {
@@ -41,7 +41,7 @@ var neighborhoodData = [
         "show": "true"
     },
     {
-        "id": "blueberries",
+        "id": "4",
         "title": "blueberry bush",
         "info": "free wild blueberries are growing here",
         "location": {
