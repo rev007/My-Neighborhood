@@ -9,6 +9,7 @@ var element; // binds a view model to a particular element on the page
 var notify = new ko.subscribable(); // allows the search view model to notify the list view model of a change
 var n; // some number
 var nbrPhotos = []; // images from Instagram
+var timeoutID;
 
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 // this view model watches the search box
@@ -68,8 +69,7 @@ ko.applyBindings(new nbrListViewModel(), element);
 // initialize the map
 function initMap() {
 
-    console.log('initMap called');
-    console.log('map start and nbrPhotos length = ' + nbrPhotos.length);
+    console.log('initMap start and nbrPhotos length = ' + nbrPhotos.length);
 
     var neighborhood = {lat: 42.42600, lng: -71.67493};
     map = new google.maps.Map(document.getElementById('map'), {
@@ -97,7 +97,7 @@ function initMap() {
         // create an info window for each object
         nbrInfos.push(
             new google.maps.InfoWindow({
-                // content: data.info
+                content: data.info // add info from neighborhoodData (add photos later after they download)
                 // content: '<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100" >' + data.info
                 // content: nbrPhotos[n].caption;
             })
@@ -115,7 +115,7 @@ function initMap() {
 
     });
 
-    console.log('map end and nbrPhotos length = ' + nbrPhotos.length);
+    console.log('initMap end and nbrPhotos length = ' + nbrPhotos.length);
 
 }
 
@@ -184,28 +184,50 @@ function search(target, list) {
 
 }
 
-// get photos from Instagram (courtesy of Misha Rudrastyh blog)
-// function getPhotos() {
-    console.log('getPhotos called');
-    $.ajax({
-        url: 'https://api.instagram.com/v1/users/self/media/recent', // no need for a user id when using a sandbox app
-        // TODO: is using jsonp bad here?
-        dataType: 'jsonp',
-        type: 'GET',
-        data: {access_token: instagramToken},
-        success: function(data){
-            for(stuff in data.data){
-                // add to our photos array
-                nbrPhotos.push(new Photo(data.data[stuff]));
-            }
-        },
-        error: function(data){
-            console.log(data); // send the error notifications to console
+// asynchronously get photos from Instagram (courtesy of Misha Rudrastyh blog)
+$.ajax({
+    url: 'https://api.instagram.com/v1/users/self/media/recent', // no need for a user id when using a sandbox app
+    // TODO: is using jsonp bad here?
+    dataType: 'jsonp',
+    type: 'GET',
+    data: {access_token: instagramToken},
+    success: function(data){
+        for(stuff in data.data){
+            nbrPhotos.push(new Photo(data.data[stuff])); // add photos to our photos array
         }
-    });
-    console.log('photos inline complete and nbrPhotos length = ' + nbrPhotos.length);
+        addPhotosToInfoWindows(); // attach photos to info windows
+    },
+    error: function(data){
+        console.log(data); // send the error notifications to console
+    }
+});
+console.log('ajax photos block complete and nbrPhotos length = ' + nbrPhotos.length);
+
+// function getPhotosComplete() {
+//     console.log('the photos download is complete!');
+//     console.log('nbrPhotos length = ' + nbrPhotos.length);
+//     // addPhotos();
+//     delayedAddPhotos();
 // }
 
+// function delayedAddPhotos() {
+//     timeoutID = window.setTimeout(addPhotos, 0000);
+// }
+
+// add Instagram photos to each marker's InfoWindow
+function addPhotosToInfoWindows() {
+    n = 0;
+    nbrInfos.forEach(function(data){
+        // content: data.info
+        // data.setContent('<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100">' + 'data.info');
+        // content: nbrPhotos[n].caption;
+        if (n < nbrPhotos.length) {
+            data.setContent(nbrPhotos[n].url);
+            n++;
+        }
+        console.log('photo in array');
+    });
+}
 
 
 
