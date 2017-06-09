@@ -10,10 +10,10 @@
 <body>
     <form id="search">
         <!-- type in search word to filter list of markers -->
-        <input data-bind="textInput: nbrMarkerSearch" placeholder="Search for markers..." />
+        <input data-bind="textInput: nbrDataSearch" placeholder="Search for markers..." />
     </form>
     <p>Your markers:</p>
-    <!-- display each visible marker from the list -->
+    <!-- display each visible title from the list -->
     <ul id="list" data-bind="foreach: nbrList">
         <li data-bind="text: title, visible: show, click: $parent.clickNbrItem"></li>
     </ul>

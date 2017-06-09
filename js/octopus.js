@@ -1,10 +1,10 @@
 // your key=API_KEY is equal to AIzaSyAdfPN1zBfjX-Xjav-aRIGbKYq2bCXWaqU... for Google Map
 var instagramToken = '1285024802.e38f0d6.1eb75e601b7e4392937accc250af8008';
 var map; // Google map canvas
-var markers = []; // data points from the model
 var marker; // any marker
-var nbrInfos = []; // info windows for the markers
+var markers = []; // data points from the model
 var nbrInfo; // any info window
+var nbrInfos = []; // info windows for the markers
 var element; // binds a view model to a particular element on the page
 var notify = new ko.subscribable(); // allows the search view model to notify the list view model of a change
 var n; // some number
@@ -18,12 +18,12 @@ var nbrSearchViewModel = function() {
     // data
 
     var self = this;
-    self.nbrMarkerSearch = ko.observable();
+    self.nbrDataSearch = ko.observable();
 
     // behaviours
 
     // watch the search box with instant updates (subscribe property and textInput courtesy of both Knockout documentation and Stack Overflow)
-    self.nbrMarkerSearch.subscribe(function (newValue) { // had to subscribe to get instant updates from textInput?
+    self.nbrDataSearch.subscribe(function (newValue) { // had to subscribe to get instant updates from textInput?
         // let the list view model know the search box has changed
         notify.notifySubscribers(newValue, "searchBoxChanged");
     });
@@ -42,7 +42,7 @@ var nbrListViewModel = function() {
     var self = this;
     self.nbrList = ko.observableArray();
 
-    // add each marker from the model to the observable array
+    // add each object from the model to the observable array
     neighborhoodData.forEach(function(data){
         self.nbrList.push(new nbrData(data)); // knockout requires an object (nbrData)?
     });
@@ -155,11 +155,9 @@ function toggleBounce(marker) {
 
 // mouse clicked a list item... do stuff here
 function itemClicked(nbrItem) {
-    console.log("highlight stuff called");
-    // do something
+
     marker = markers[nbrItem.id];
     nbrInfo = nbrInfos[nbrItem.id];
-
     toggleBounce(marker);
     nbrInfo.open(map, marker);
 
