@@ -68,6 +68,9 @@ ko.applyBindings(new nbrListViewModel(), element);
 // initialize the map
 function initMap() {
 
+    console.log('initMap called');
+    console.log('map start and nbrPhotos length = ' + nbrPhotos.length);
+
     var neighborhood = {lat: 42.42600, lng: -71.67493};
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 17,
@@ -96,6 +99,7 @@ function initMap() {
             new google.maps.InfoWindow({
                 // content: data.info
                 // content: '<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100" >' + data.info
+                // content: nbrPhotos[n].caption;
             })
         );
 
@@ -110,6 +114,8 @@ function initMap() {
         attachBounce(marker);
 
     });
+
+    console.log('map end and nbrPhotos length = ' + nbrPhotos.length);
 
 }
 
@@ -179,38 +185,28 @@ function search(target, list) {
 }
 
 // get photos from Instagram (courtesy of Misha Rudrastyh blog)
-function getNbrPhotos() {
+// function getPhotos() {
+    console.log('getPhotos called');
     $.ajax({
         url: 'https://api.instagram.com/v1/users/self/media/recent', // no need for a user id when using a sandbox app
+        // TODO: is using jsonp bad here?
         dataType: 'jsonp',
         type: 'GET',
         data: {access_token: instagramToken},
         success: function(data){
-            console.log(data);
-            for( x in data.data ){
-                // $('ul').append('<li><img src="'+data.data[x].images.low_resolution.url+'"></li>'); // data.data[x].images.low_resolution.url - URL of image, 306х306
-                console.log(data.data[x].caption.text);
-                // nbrInfos[0].content = '<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100" >' + data.info;
-                // nbrInfos[0].setContent('pizza');
-                // nbrInfos[0].setContent('<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100">');
-                // nbrInfos[0].setContent('<img src="'+data.data[x].images.low_resolution.url+'">');
-
-                // nbrPhotos.push('<img src="' + data.data[x].images.low_resolution.url + '>');
-
-                nbrPhotos.push(new Photo(data.data[x]));
-
-
-
-
-
+            for(stuff in data.data){
+                // add to our photos array
+                nbrPhotos.push(new Photo(data.data[stuff]));
             }
         },
         error: function(data){
             console.log(data); // send the error notifications to console
         }
     });
+    console.log('photos inline complete and nbrPhotos length = ' + nbrPhotos.length);
+// }
 
-}
+
 
 
 

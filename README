@@ -9,8 +9,11 @@ HOW TO RUN
 ### Getting started
 
 1. Use the search box to filter blah blah blah
+2. To get Instagram photos into your markers, set the caption text of your
+   Instagram photo to be identical to the marker's title
 
 ### Credits
 
 Multiple code segments adapted from Google examples showing how to use the API.
-
+Multiple code segments adapted from KnockoutJS showing how to use the API.
+Misha Rudrastyh for how to retrieve photos from Instagram.
