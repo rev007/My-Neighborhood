@@ -2,7 +2,7 @@
 var instagramToken = '1285024802.e38f0d6.1eb75e601b7e4392937accc250af8008';
 var map; // Google map canvas
 var marker; // any marker
-var markers = []; // data points from the model
+var markers = []; // data points for the map
 var nbrInfo; // any info window
 var nbrInfos = []; // info windows for the markers
 var element; // binds a view model to a particular element on the page
@@ -69,8 +69,6 @@ ko.applyBindings(new nbrListViewModel(), element);
 // initialize the map
 function initMap() {
 
-    console.log('initMap start and nbrPhotos length = ' + nbrPhotos.length);
-
     var neighborhood = {lat: 42.42600, lng: -71.67493};
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 17,
@@ -114,8 +112,6 @@ function initMap() {
         attachBounce(marker);
 
     });
-
-    console.log('initMap end and nbrPhotos length = ' + nbrPhotos.length);
 
 }
 
@@ -199,14 +195,6 @@ $.ajax({
         console.log(data); // send the error notifications to console
     }
 });
-console.log('ajax photos block complete and nbrPhotos length = ' + nbrPhotos.length);
-
-// function getPhotosComplete() {
-//     console.log('the photos download is complete!');
-//     console.log('nbrPhotos length = ' + nbrPhotos.length);
-//     // addPhotos();
-//     delayedAddPhotos();
-// }
 
 // function delayedAddPhotos() {
 //     timeoutID = window.setTimeout(addPhotos, 0000);
@@ -216,14 +204,9 @@ console.log('ajax photos block complete and nbrPhotos length = ' + nbrPhotos.len
 function addPhotosToInfoWindows() {
     n = 0;
     nbrInfos.forEach(function(data){
-        console.log(nbrInfos[0].content);
         // content: data.info
         // data.setContent('<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100">' + 'data.info');
         // content: nbrPhotos[n].caption;
-
-
-
-
         if (n < nbrPhotos.length) {
             // data.setContent(nbrPhotos[n].url);
 
@@ -252,7 +235,7 @@ function addPhotosToInfoWindows() {
             var contentString =
                 '<h1 id="firstHeading" class="firstHeading">'+nbrPhotos[n].caption+'</h1>'+
                 '<div id="bodyContent">'+
-                '<p><b>'+'put something here'+'</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+                '<p><b>'+neighborhoodData[n].title+'</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
                 'sandstone rock formation in the southern part of the '+
                 'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
                 'south west of the nearest large town, Alice Springs; 450&#160;km '+
@@ -276,7 +259,6 @@ function addPhotosToInfoWindows() {
 
             n++;
         }
-        console.log('photo in array');
     });
 }
 
