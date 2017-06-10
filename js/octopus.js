@@ -10,7 +10,6 @@ var element; // binds a view model to a particular element on the page
 var notify = new ko.subscribable(); // allows the search view model to notify the list view model of a change
 var n; // some number
 var nbrPhotos = []; // images from Instagram
-var timeoutID;
 
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 // this view model watches the search box
@@ -196,7 +195,8 @@ $.ajax({
         addPhotosToInfoWindows(); // attach photos to info windows
     },
     error: function(data){
-        console.log(data); // send the error notifications to console
+        console.log(data); // send the error notifications to console for developer troubleshooting
+        alert('There was an issue with downloading photos from Instagram! Please contact customer support.'); // alert user
     }
 });
 
@@ -223,13 +223,6 @@ function addPhotosToInfoWindows() {
     
 }
 
-
-
-
-
-
-
-
-
-
-
+function gm_authFailure() {
+    console.log('Google maps failed to authenticate!');
+}
