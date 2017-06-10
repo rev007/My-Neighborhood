@@ -101,7 +101,7 @@ function initMap() {
         // create an info window for each object
         nbrInfos.push(
             new google.maps.InfoWindow({
-                content: contentString // add info from neighborhoodData (add photos later after they download)
+                content: contentString // add content from neighborhoodData (add photos later after they download)
             })
         );
 
@@ -193,7 +193,7 @@ $.ajax({
         for(stuff in data.data){
             nbrPhotos.push(new Photo(data.data[stuff])); // add photos to our photos array
         }
-        // addPhotosToInfoWindows(); // attach photos to info windows
+        addPhotosToInfoWindows(); // attach photos to info windows
     },
     error: function(data){
         console.log(data); // send the error notifications to console
@@ -203,44 +203,74 @@ $.ajax({
 // add Instagram photos to each marker's InfoWindow
 function addPhotosToInfoWindows() {
     n = 0;
-    nbrInfos.forEach(function(data){
-        // content: data.info
+    nbrInfos.forEach(function(windowData){
+
+        // var str = "Hello world, welcome to the universe.";
+        console.log('windowData = '   + windowData.content);
+        var n = windowData.content.indexOf("</h3>");
+        console.log('found </h3> at index = ' + n);
+        var res = windowData.content.substring(4, n);
+        console.log('substring = ' + res);
+
         // data.setContent('<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100">' + 'data.info');
         // content: nbrPhotos[n].caption;
-        if (n < nbrPhotos.length) {
+
+        // contentString = windowData.content;
+        // console.log(contentString);
+
+        // var zork = neighborhoodData[n].title;
+        // console.log('content title = ' + zork);
+        // console.log('photo caption = ' + nbrPhotos[n].caption);
+
+
+        nbrPhotos.forEach(function(photoData){
+
+            console.log('photoData = ' + photoData.caption);
+
+            if (photoData.caption === windowData.content) {
+                console.log('these two are the same');
+            }
+
+
+        });
+
+        // if (n < nbrPhotos.length) {
+        //
+        //     contentString = contentString + nbrPhotos[n].url;
+        //     console.log('new content string = ' + contentString);
             // data.setContent(nbrPhotos[n].url);
 
-            var contentString =
-                '<h1 id="firstHeading" class="firstHeading">'+nbrPhotos[n].caption+'</h1>'+
-                '<div id="bodyContent">'+
-                '<p><b>'+neighborhoodData[n].title+'</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-                'sandstone rock formation in the southern part of the '+
-                'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-                'south west of the nearest large town, Alice Springs; 450&#160;km '+
-                '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-                'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-                'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-                'Aboriginal people of the area. It has many springs, waterholes, '+
-                'rock caves and ancient paintings. Uluru is listed as a World '+
-                'Heritage Site.</p>'+
-                nbrPhotos[n].url+
-                '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-                'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-                '(last visited June 22, 2009).</p>'+
-                '</div>';
-
-            var contentString =
-                '<div id="'+nbrdatastuff+'">'+
-                '<h1>'+nbrPhotos[n].caption+'</h1>'+
-                '<p><b>'+neighborhoodData[n].title+'</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-                'rock caves and ancient paintings. Uluru is listed as a World '+
-                'Heritage Site.</p>'+
-                nbrPhotos[n].url+
-                '</div>';
-
-            data.setContent(contentString);
-            n++;
-        }
+            // var contentString =
+            //     '<h1 id="firstHeading" class="firstHeading">'+nbrPhotos[n].caption+'</h1>'+
+            //     '<div id="bodyContent">'+
+            //     '<p><b>'+neighborhoodData[n].title+'</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+            //     'sandstone rock formation in the southern part of the '+
+            //     'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
+            //     'south west of the nearest large town, Alice Springs; 450&#160;km '+
+            //     '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
+            //     'features of the Uluru - Kata Tjuta National Park. Uluru is '+
+            //     'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
+            //     'Aboriginal people of the area. It has many springs, waterholes, '+
+            //     'rock caves and ancient paintings. Uluru is listed as a World '+
+            //     'Heritage Site.</p>'+
+            //     nbrPhotos[n].url+
+            //     '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
+            //     'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
+            //     '(last visited June 22, 2009).</p>'+
+            //     '</div>';
+            //
+            // var contentString =
+            //     '<div id="'+nbrdatastuff+'">'+
+            //     '<h1>'+nbrPhotos[n].caption+'</h1>'+
+            //     '<p><b>'+neighborhoodData[n].title+'</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+            //     'rock caves and ancient paintings. Uluru is listed as a World '+
+            //     'Heritage Site.</p>'+
+            //     nbrPhotos[n].url+
+            //     '</div>';
+            //
+        //     windowData.setContent(contentString);
+        //     n++;
+        // }
     });
 }
 
