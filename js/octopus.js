@@ -202,78 +202,25 @@ $.ajax({
 
 // add Instagram photos to each marker's InfoWindow
 function addPhotosToInfoWindows() {
-    n = 0;
+
+    // get the title from each info window
     nbrInfos.forEach(function(windowData){
 
-        console.log('windowData = ' + windowData.content);
-        n = windowData.content.indexOf("</h3>");
-        console.log('found </h3> at index = ' + n);
-        contentString = windowData.content.substring(4, n);
-        console.log('substring = ' + contentString);
+        n = windowData.content.indexOf("</h3>"); // find the position of the closing <h3> element
+        contentString = windowData.content.substring(4, n); // grab the title of the current info window between the two <h3> elements
 
-        // data.setContent('<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100">' + 'data.info');
-        // content: nbrPhotos[n].caption;
-
-        // contentString = windowData.content;
-        // console.log(contentString);
-
-        // var zork = neighborhoodData[n].title;
-        // console.log('content title = ' + zork);
-        // console.log('photo caption = ' + nbrPhotos[n].caption);
-
-
+        // find a matching photo
         nbrPhotos.forEach(function(photoData){
 
-            console.log('photoData = ' + photoData.caption);
-
             if (photoData.caption === contentString) {
-                console.log('these two are the same');
-                contentString = windowData.content + photoData.url;
-                console.log('new content is ' + contentString);
-                windowData.setContent(contentString);
+                contentString = windowData.content + photoData.url; // create a new content string that includes the matching photo
+                windowData.setContent(contentString); // set the new content string to the current info window
             }
-
 
         });
 
-        // if (n < nbrPhotos.length) {
-        //
-        //     contentString = contentString + nbrPhotos[n].url;
-        //     console.log('new content string = ' + contentString);
-            // data.setContent(nbrPhotos[n].url);
-
-            // var contentString =
-            //     '<h1 id="firstHeading" class="firstHeading">'+nbrPhotos[n].caption+'</h1>'+
-            //     '<div id="bodyContent">'+
-            //     '<p><b>'+neighborhoodData[n].title+'</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-            //     'sandstone rock formation in the southern part of the '+
-            //     'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-            //     'south west of the nearest large town, Alice Springs; 450&#160;km '+
-            //     '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-            //     'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-            //     'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-            //     'Aboriginal people of the area. It has many springs, waterholes, '+
-            //     'rock caves and ancient paintings. Uluru is listed as a World '+
-            //     'Heritage Site.</p>'+
-            //     nbrPhotos[n].url+
-            //     '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-            //     'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-            //     '(last visited June 22, 2009).</p>'+
-            //     '</div>';
-            //
-            // var contentString =
-            //     '<div id="'+nbrdatastuff+'">'+
-            //     '<h1>'+nbrPhotos[n].caption+'</h1>'+
-            //     '<p><b>'+neighborhoodData[n].title+'</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-            //     'rock caves and ancient paintings. Uluru is listed as a World '+
-            //     'Heritage Site.</p>'+
-            //     nbrPhotos[n].url+
-            //     '</div>';
-            //
-        //     windowData.setContent(contentString);
-        //     n++;
-        // }
     });
+    
 }
 
 
