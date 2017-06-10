@@ -93,31 +93,15 @@ function initMap() {
         );
 
 
-
+        // create some content for an info window
         contentString =
             '<h3>'+nbrData.title+'</h3>'+
             '<p>'+nbrData.info+'</p>';
 
-
-
-
-
-        // TODO: is nbrInfos array needed? examine this code later
         // create an info window for each object
         nbrInfos.push(
             new google.maps.InfoWindow({
-                // content: nbrData.info // add info from neighborhoodData (add photos later after they download)
-                // content: '<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100" >' + data.info
-                // content: nbrPhotos[n].caption;
-
-
-
-                content: contentString
-
-
-
-
-
+                content: contentString // add info from neighborhoodData (add photos later after they download)
             })
         );
 
