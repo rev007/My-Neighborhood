@@ -1,5 +1,5 @@
 // neighborhood data constructor
-var nbrData = function(data) {
+var NbrData = function(data) {
     this.id = data.id;
     this.title = data.title;
     this.info = data.info;
