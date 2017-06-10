@@ -205,12 +205,11 @@ function addPhotosToInfoWindows() {
     n = 0;
     nbrInfos.forEach(function(windowData){
 
-        // var str = "Hello world, welcome to the universe.";
-        console.log('windowData = '   + windowData.content);
-        var n = windowData.content.indexOf("</h3>");
+        console.log('windowData = ' + windowData.content);
+        n = windowData.content.indexOf("</h3>");
         console.log('found </h3> at index = ' + n);
-        var res = windowData.content.substring(4, n);
-        console.log('substring = ' + res);
+        contentString = windowData.content.substring(4, n);
+        console.log('substring = ' + contentString);
 
         // data.setContent('<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100">' + 'data.info');
         // content: nbrPhotos[n].caption;
@@ -227,8 +226,11 @@ function addPhotosToInfoWindows() {
 
             console.log('photoData = ' + photoData.caption);
 
-            if (photoData.caption === windowData.content) {
+            if (photoData.caption === contentString) {
                 console.log('these two are the same');
+                contentString = windowData.content + photoData.url;
+                console.log('new content is ' + contentString);
+                windowData.setContent(contentString);
             }
 
 
