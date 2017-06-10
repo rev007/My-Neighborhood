@@ -5,6 +5,7 @@ var marker; // any marker
 var markers = []; // data points for the map
 var nbrInfo; // any info window
 var nbrInfos = []; // info windows for the markers
+var contentString; // to build content for info windows
 var element; // binds a view model to a particular element on the page
 var notify = new ko.subscribable(); // allows the search view model to notify the list view model of a change
 var n; // some number
@@ -91,13 +92,32 @@ function initMap() {
             })
         );
 
+
+
+        contentString =
+            '<h3>'+nbrData.title+'</h3>'+
+            '<p>'+nbrData.info+'</p>';
+
+
+
+
+
         // TODO: is nbrInfos array needed? examine this code later
         // create an info window for each object
         nbrInfos.push(
             new google.maps.InfoWindow({
-                content: nbrData.info // add info from neighborhoodData (add photos later after they download)
+                // content: nbrData.info // add info from neighborhoodData (add photos later after they download)
                 // content: '<img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100" >' + data.info
                 // content: nbrPhotos[n].caption;
+
+
+
+                content: contentString
+
+
+
+
+
             })
         );
 
@@ -189,7 +209,7 @@ $.ajax({
         for(stuff in data.data){
             nbrPhotos.push(new Photo(data.data[stuff])); // add photos to our photos array
         }
-        addPhotosToInfoWindows(); // attach photos to info windows
+        // addPhotosToInfoWindows(); // attach photos to info windows
     },
     error: function(data){
         console.log(data); // send the error notifications to console
@@ -223,6 +243,15 @@ function addPhotosToInfoWindows() {
                 '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
                 'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
                 '(last visited June 22, 2009).</p>'+
+                '</div>';
+
+            var contentString =
+                '<div id="'+nbrdatastuff+'">'+
+                '<h1>'+nbrPhotos[n].caption+'</h1>'+
+                '<p><b>'+neighborhoodData[n].title+'</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+                'rock caves and ancient paintings. Uluru is listed as a World '+
+                'Heritage Site.</p>'+
+                nbrPhotos[n].url+
                 '</div>';
 
             data.setContent(contentString);
