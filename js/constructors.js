@@ -9,11 +9,6 @@ var NbrData = function(data) {
 
 // photo constructor
 var Photo = function(data) {
-    // this.url = '<img src="'+data.data[x].images.low_resolution.url+'">';
-    // <img src="img/wireframe.jpg" alt="a wireframe" width="100" height="100">'
-    // this.url = '<img src="'+data.images.low_resolution.url+'">';
     this.url = '<img src="'+data.images.low_resolution.url+'" alt="Instagram photo" width="100" height="100">';
-    // this.url = '<img src="'+data.images.low_resolution.url+'" alt="Instagram photo" width=photoWidth height="100">';
-
     this.caption = data.caption.text;
 }
