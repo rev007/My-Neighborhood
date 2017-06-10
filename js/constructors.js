@@ -16,5 +16,4 @@ var Photo = function(data) {
     // this.url = '<img src="'+data.images.low_resolution.url+'" alt="Instagram photo" width=photoWidth height="100">';
 
     this.caption = data.caption.text;
-    console.log(this.caption);
 }
