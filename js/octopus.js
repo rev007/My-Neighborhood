@@ -91,7 +91,6 @@ function initMap() {
             })
         );
 
-
         // create some content for an info window
         contentString =
             '<h3>'+nbrData.title+'</h3>'+
