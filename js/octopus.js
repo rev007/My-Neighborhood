@@ -128,11 +128,8 @@ function attachMessage(marker, message) {
 // TODO: would be nice to understand how to add toggleBounce() here instead of duplicating
 function attachBounce(marker) {
     marker.addListener('click', function() {
-        if (marker.getAnimation() !== null) {
-            marker.setAnimation(null);
-        } else {
-            marker.setAnimation(google.maps.Animation.BOUNCE);
-        }
+        stopBounce(); // stop any marker that might be bouncing
+        marker.setAnimation(google.maps.Animation.BOUNCE);
     });
 }
 
@@ -141,8 +138,16 @@ function toggleMessage(marker) {
     message.open(marker.get(map), marker);
 }
 
+// turn bouncing off for all markers
+function stopBounce() {
+    markers.forEach(function(data) {
+        data.setAnimation(null);
+    });
+}
+
 // turn bouncing marker animation on and off
 function toggleBounce(marker) {
+    stopBounce(); // stop any marker that might be bouncing
     if (marker.getAnimation() !== null) {
         marker.setAnimation(null);
     } else {
