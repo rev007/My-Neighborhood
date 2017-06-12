@@ -251,6 +251,4 @@ function addPhotosToInfoWindows() {
     
 }
 
-function gm_authFailure() {
-    console.log('Google maps failed to authenticate!');
-}
+
