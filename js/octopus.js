@@ -63,7 +63,7 @@ var nbrListViewModel = function() {
     self.clickNbrItem = function(nbrItem) {
         // TODO: make all list view items and markers normal then add highlight to the clicked item
         itemClicked(nbrItem);
-    }
+    };
 
     // receives a notification from the search view model when the search box changes
     notify.subscribe(function(newValue) {
@@ -176,7 +176,7 @@ function stopBounce() {
 // turn bouncing marker animation on and off
 function toggleBounce(marker) {
     var bMarkerWasBouncing = false;
-    if (marker.getAnimation() !== null) {bMarkerWasBouncing = true} // check if marker was already bouncing when clicked
+    if (marker.getAnimation() !== null) {bMarkerWasBouncing = true;} // check if marker was already bouncing when clicked
     stopBounce(); // stop all markers from bouncing
     if (!bMarkerWasBouncing) {
         marker.setAnimation(google.maps.Animation.BOUNCE);
@@ -211,7 +211,7 @@ function search(target, list) {
             // turn off the list item and marker
             nbrItem.show(false);
             markers[nbrItem.id].setMap(null);
-        };
+        }
     });
 
 }
@@ -229,7 +229,7 @@ $.ajax({
     type: 'GET',
     data: {access_token: instagramToken},
     success: function(data){
-        for(stuff in data.data){
+        for(var stuff in data.data){
             nbrPhotos.push(new Photo(data.data[stuff])); // add photos to our photos array
         }
         addPhotosToInfoWindows(); // attach photos to info windows
