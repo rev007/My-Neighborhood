@@ -117,6 +117,10 @@ function initMap() {
 
 }
 
+/* ==========================================================================
+ MARKERS displays and animations
+ ========================================================================== */
+
 // attach an info window to a marker (courtesy of Google Maps API documentation)
 function attachMessage(marker, message) {
     marker.addListener('click', function() {
@@ -125,12 +129,8 @@ function attachMessage(marker, message) {
 }
 
 // add bounce animation to a marker that activates on mouse click (courtesy of Google Maps API documentation)
-// TODO: would be nice to understand how to add toggleBounce() here instead of duplicating
 function attachBounce(marker) {
-    marker.addListener('click', function() {
-        stopBounce(); // stop any marker that might be bouncing
-        marker.setAnimation(google.maps.Animation.BOUNCE);
-    });
+    marker.addListener('click', function() {toggleBounce(marker);});
 }
 
 // open the marker's info window after a mouse click
@@ -147,14 +147,17 @@ function stopBounce() {
 
 // turn bouncing marker animation on and off
 function toggleBounce(marker) {
-    stopBounce(); // stop any marker that might be bouncing
-    if (marker.getAnimation() !== null) {
-        marker.setAnimation(null);
-    } else {
+    var bMarkerWasBouncing = false;
+    if (marker.getAnimation() !== null) {bMarkerWasBouncing = true} // check if marker was already bouncing when clicked
+    stopBounce(); // stop all markers from bouncing
+    if (!bMarkerWasBouncing) {
         marker.setAnimation(google.maps.Animation.BOUNCE);
     }
-
 }
+
+/* ==========================================================================
+ LIST ITEMS
+ ========================================================================== */
 
 // mouse clicked a list item... do stuff here
 function itemClicked(nbrItem) {
@@ -184,6 +187,10 @@ function search(target, list) {
     });
 
 }
+
+/* ==========================================================================
+ PHOTOS retrieve Instagram URLs and attach
+ ========================================================================== */
 
 // asynchronously get photos from Instagram (courtesy of Misha Rudrastyh blog)
 $.ajax({
