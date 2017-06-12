@@ -27,7 +27,7 @@ SEARCH BOX
 
 #search {
     height: 10%;
-    background-image: url('../img/search.svg');
+    background-image: url(../img/search.svg);
     background-repeat: no-repeat;
     background-size: 15px 15px;
     padding: 0 0 0 30px;
