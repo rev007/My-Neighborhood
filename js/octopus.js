@@ -161,11 +161,6 @@ function attachBounce(marker) {
     marker.addListener('click', function() {toggleBounce(marker);});
 }
 
-// open the marker's info window after a mouse click
-function toggleMessage(marker) {
-    message.open(marker.get(map), marker);
-}
-
 // turn bouncing off for all markers
 function stopBounce() {
     markers.forEach(function(data) {
@@ -229,9 +224,9 @@ $.ajax({
     type: 'GET',
     data: {access_token: instagramToken},
     success: function(data){
-        for(var stuff in data.data){
-            nbrPhotos.push(new Photo(data.data[stuff])); // add photos to our photos array
-        }
+        data.data.forEach(function(element) {
+            nbrPhotos.push(new Photo(element)); // add photos to our photos array
+        });
         addPhotosToInfoWindows(); // attach photos to info windows
     },
     error: function(data){
