@@ -81,6 +81,18 @@ ko.applyBindings(new nbrListViewModel(), element);
  MAP
  ========================================================================== */
 
+// this error will be called if something goes wrong with your Google map scripting from index.html
+function googleError() {
+    console.log('There is something wrong with your JavaScript!');
+    alert('There was an issue with Neighborhood Map! Please contact customer support.'); // alert user
+}
+
+// this error will be called if something goes wrong with the Google map API itself
+function gm_authFailure() {
+    console.log('Google maps failed to authenticate!');
+    alert('There was an issue with Google maps! Please contact Google.'); // alert user
+}
+
 // third party API courtesy of Google
 // initialize the map
 function initMap() {
