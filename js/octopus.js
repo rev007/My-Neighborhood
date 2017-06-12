@@ -11,6 +11,11 @@ var notify = new ko.subscribable(); // allows the search view model to notify th
 var n; // some number
 var nbrPhotos = []; // images from Instagram
 
+/* ==========================================================================
+ SEARCH BOX VIEW MODEL
+ ========================================================================== */
+
+// third party API courtesy of Knockout
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 // this view model watches the search box
 var nbrSearchViewModel = function() {
@@ -33,6 +38,11 @@ var nbrSearchViewModel = function() {
 element = document.getElementById('search'); // we only want to view the DOM associated with an id named 'search'
 ko.applyBindings(new nbrSearchViewModel(), element);
 
+/* ==========================================================================
+ LIST ITEMS VIEW MODEL
+ ========================================================================== */
+
+// third party API courtesy of Knockout
 // this is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 // this view model watches the list item box
 var nbrListViewModel = function() {
@@ -66,6 +76,12 @@ var nbrListViewModel = function() {
 element = document.getElementById('list'); // we only want to view the DOM associated with an id named 'list'
 ko.applyBindings(new nbrListViewModel(), element);
 
+
+/* ==========================================================================
+ MAP
+ ========================================================================== */
+
+// third party API courtesy of Google
 // initialize the map
 function initMap() {
 
@@ -192,6 +208,7 @@ function search(target, list) {
  PHOTOS retrieve Instagram URLs and attach
  ========================================================================== */
 
+// third party API courtesy of Instagram
 // asynchronously get photos from Instagram (courtesy of Misha Rudrastyh blog)
 $.ajax({
     url: 'https://api.instagram.com/v1/users/self/media/recent', // no need for a user id when using a sandbox app
