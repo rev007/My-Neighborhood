@@ -125,6 +125,8 @@ function initMap() {
             '<p>'+nbrData.info+'</p>';
 
         // create an info window for each object
+        // NOTE: i'm going against convention and creating an info window for each marker allowing the user to decide
+        // when to close an info window
         nbrInfos.push(
             new google.maps.InfoWindow({
                 content: contentString // add content from neighborhoodData (add photos later after they download)
@@ -192,6 +194,10 @@ function itemClicked(nbrItem) {
 
 }
 
+/* ==========================================================================
+ LIST ITEMS AND MARKERS
+ ========================================================================== */
+
 // turn list items and map markers on and off based on the search target
 function search(target, list) {
 
@@ -201,11 +207,11 @@ function search(target, list) {
             // turn on the list item and marker
             console.log("found search in " + nbrItem.title);
             nbrItem.show(true);
-            markers[nbrItem.id].setMap(map);
+            markers[nbrItem.id].setVisible(true);
         } else {
             // turn off the list item and marker
             nbrItem.show(false);
-            markers[nbrItem.id].setMap(null);
+            markers[nbrItem.id].setVisible(false);
         }
     });
 
