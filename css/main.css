@@ -18,7 +18,8 @@ KNOCKOUT
 *********************/
 
 #knockout {
-    height: 35%;
+    /*height: 35%;*/
+    height: 28%;
 }
 
 /*********************
@@ -56,7 +57,7 @@ MAP
 *********************/
 
 #map {
-    height: 65%;
+    height: 70%;
     width: 100%;
     background-color: grey;
 }

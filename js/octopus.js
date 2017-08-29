@@ -10,6 +10,8 @@ var element; // binds a view model to a particular element on the page
 var notify = new ko.subscribable(); // allows the search view model to notify the list view model of a change
 var n; // some number
 var nbrPhotos = []; // images from Instagram
+var historicalOverlay;
+
 
 /* ==========================================================================
  SEARCH BOX VIEW MODEL
@@ -97,11 +99,26 @@ function gm_authFailure() {
 // initialize the map
 function initMap() {
 
-    var neighborhood = {lat: 42.42600, lng: -71.67493};
+    var neighborhood = {lat: 42.42580, lng: -71.67593};
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 17,
+        zoom: 18,
         center: neighborhood
     });
+
+    var imageBounds = {
+        north: 42.42707,
+        south: 42.42432,
+        east: -71.67329,
+        west: -71.67862
+    };
+
+    // historicalOverlay = new google.maps.GroundOverlay(
+    //     'https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
+    //     imageBounds);
+    neighborhoodOverlay = new google.maps.GroundOverlay(
+        'img/neighborhood2x.png',
+        imageBounds);
+    neighborhoodOverlay.setMap(map);
 
     // cycle through each object in the neighborhoodData model
     neighborhoodData.forEach(function(nbrData){
