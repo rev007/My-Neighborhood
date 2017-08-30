@@ -5,13 +5,25 @@ var marker; // any marker
 var markers = []; // data points for the map
 var nbrInfo; // any info window
 var nbrInfos = []; // info windows for the markers
-var contentString; // to build content for info windows
+var contentString; // content for info windows of downloaded model data
+var newMarkerContentString; // content for info windows of new markers
 var element; // binds a view model to a particular element on the page
 var notify = new ko.subscribable(); // allows the search view model to notify the list view model of a change
 var n; // some number
 var nbrPhotos = []; // images from Instagram
-var historicalOverlay;
 
+// var infowindow;
+// var messagewindow;
+
+newMarkerContentString =
+    '<div id="table">'+
+    '<table>'+
+    '<tr><td>Title:</td> <td><input type="text" id="name"/> </td> </tr>'+
+    '<tr><td>Info:</td> <td><input type="text" id="address"/> </td> </tr>'+
+    '<tr><td></td><td><input type="button" value="Save" onclick="saveData()"/>'+
+    '<input type="button" value="Delete" onclick="deleteData()"/></td></tr>'+
+    '<table>'+
+    '<div>';
 
 /* ==========================================================================
  SEARCH BOX VIEW MODEL
@@ -112,10 +124,7 @@ function initMap() {
         west: -71.67862
     };
 
-    // historicalOverlay = new google.maps.GroundOverlay(
-    //     'https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
-    //     imageBounds);
-    neighborhoodOverlay = new google.maps.GroundOverlay(
+    var neighborhoodOverlay = new google.maps.GroundOverlay(
         'img/neighborhood2x.png',
         imageBounds);
     neighborhoodOverlay.setMap(map);
@@ -136,7 +145,7 @@ function initMap() {
             })
         );
 
-        // create some content for an info window
+        // create some content for the info windows
         contentString =
             '<h3>'+nbrData.title+'</h3>'+
             '<p>'+nbrData.info+'</p>';
@@ -162,6 +171,58 @@ function initMap() {
 
     });
 
+    // create a new marker whenever neighborhood map is clicked
+    google.maps.event.addListener(neighborhoodOverlay, "click", function(event) {
+        // markers.push(
+        //     new google.maps.Marker({
+        //         position: event.latLng,
+        //         map: map,
+        //         title: 'new',
+        //         animation: google.maps.Animation.DROP
+        //     })
+        // );
+
+        newMarker(event.latLng);
+        newInfoWindow();
+
+        // get the last marker and info window
+        marker = markers[markers.length - 1];
+        nbrInfo = nbrInfos[nbrInfos.length - 1];
+
+        // attach the info window to the marker
+        attachMessage(marker, nbrInfo);
+
+    });
+
+}
+
+/* ==========================================================================
+ TEST AREA do stuff here
+ ========================================================================== */
+
+function newMarker(coordinates) {
+    markers.push(
+        new google.maps.Marker({
+            position: coordinates,
+            map: map,
+            title: 'new',
+            animation: google.maps.Animation.DROP
+        })
+    );
+}
+
+function newInfoWindow() {
+    nbrInfos.push(
+        new google.maps.InfoWindow({
+            content: newMarkerContentString // add blah blah
+        })
+    );
+}
+
+function saveData() {
+    console.log('saved!');
+    // attach a bounce animation to the marker
+    // attachBounce(marker);
 }
 
 /* ==========================================================================
