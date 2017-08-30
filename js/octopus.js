@@ -12,19 +12,6 @@ var notify = new ko.subscribable(); // allows the search view model to notify th
 var n; // some number
 var nbrPhotos = []; // images from Instagram
 
-// var infowindow;
-// var messagewindow;
-
-newMarkerContentString =
-    '<div id="table">'+
-    '<table>'+
-    '<tr><td>Title:</td> <td><input type="text" id="name"/> </td> </tr>'+
-    '<tr><td>Info:</td> <td><input type="text" id="address"/> </td> </tr>'+
-    '<tr><td></td><td><input type="button" value="Save" onclick="saveData()"/>'+
-    '<input type="button" value="Delete" onclick="deleteData()"/></td></tr>'+
-    '<table>'+
-    '<div>';
-
 /* ==========================================================================
  SEARCH BOX VIEW MODEL
  ========================================================================== */
@@ -124,6 +111,7 @@ function initMap() {
         west: -71.67862
     };
 
+    // add the neighborhood image to the map
     var neighborhoodOverlay = new google.maps.GroundOverlay(
         'img/neighborhood2x.png',
         imageBounds);
@@ -146,51 +134,36 @@ function initMap() {
         );
 
         // create some content for the info windows
-        contentString =
+        initialContentString =
             '<h3>'+nbrData.title+'</h3>'+
             '<p>'+nbrData.info+'</p>';
 
         // create an info window for each object
-        // NOTE: i'm going against convention and creating an info window for each marker allowing the user to decide
-        // when to close an info window
-        nbrInfos.push(
-            new google.maps.InfoWindow({
-                content: contentString // add content from neighborhoodData (add photos later after they download)
-            })
-        );
-
-        // get the last marker and info window
-        marker = markers[markers.length - 1];
-        nbrInfo = nbrInfos[nbrInfos.length - 1];
-
-        // attach the info window to the marker
-        attachMessage(marker, nbrInfo);
+        // NOTE: creating an info window for each marker allowing the user to decide when to close it
+        newInfoWindow(initialContentString); // add content from neighborhoodData (add photos later after they download)
+        attachInfoWindow();
 
         // attach a bounce animation to the marker
         attachBounce(marker);
 
     });
 
-    // create a new marker whenever neighborhood map is clicked
+    // create a new marker whenever the neighborhood map is clicked
     google.maps.event.addListener(neighborhoodOverlay, "click", function(event) {
-        // markers.push(
-        //     new google.maps.Marker({
-        //         position: event.latLng,
-        //         map: map,
-        //         title: 'new',
-        //         animation: google.maps.Animation.DROP
-        //     })
-        // );
+
+        newMarkerContentString =
+            '<div id="table">'+
+            '<table>'+
+            '<tr><td>Title:</td> <td><input type="text" id="name"/> </td> </tr>'+
+            '<tr><td>Info:</td> <td><input type="text" id="address"/> </td> </tr>'+
+            '<tr><td></td><td><input type="button" value="Save" onclick="saveData()"/>'+
+            '<input type="button" value="Delete" onclick="deleteData()"/></td></tr>'+
+            '<table>'+
+            '<div>';
 
         newMarker(event.latLng);
-        newInfoWindow();
-
-        // get the last marker and info window
-        marker = markers[markers.length - 1];
-        nbrInfo = nbrInfos[nbrInfos.length - 1];
-
-        // attach the info window to the marker
-        attachMessage(marker, nbrInfo);
+        newInfoWindow(newMarkerContentString);
+        attachInfoWindow();
 
     });
 
@@ -211,15 +184,30 @@ function newMarker(coordinates) {
     );
 }
 
-function newInfoWindow() {
+function newInfoWindow(contentString) {
     nbrInfos.push(
         new google.maps.InfoWindow({
-            content: newMarkerContentString // add blah blah
+            content: contentString // add blah blah
         })
     );
 }
 
+function attachInfoWindow() {
+    // get the last marker and info window
+    marker = markers[markers.length - 1];
+    nbrInfo = nbrInfos[nbrInfos.length - 1];
+
+    // attach the info window to the marker
+    attachMessage(marker, nbrInfo);
+}
+
 function saveData() {
+    console.log('saved!');
+    // attach a bounce animation to the marker
+    // attachBounce(marker);
+}
+
+function deleteData() {
     console.log('saved!');
     // attach a bounce animation to the marker
     // attachBounce(marker);
