@@ -151,15 +151,20 @@ function initMap() {
     // create a new marker whenever the neighborhood map is clicked
     google.maps.event.addListener(neighborhoodOverlay, "click", function(event) {
 
+        // determine the index of the next info window that will be created
+        n = nbrInfos.length;
+
+        // create some content for the next info window and assign it an index value
         newMarkerContentString =
-            '<div id="table">'+
+            '<div id="pizza">'+
+            '<div id='+n.toString()+' class="info-window">'+
             '<table>'+
             '<tr><td>Title:</td> <td><input type="text" id="name"/> </td> </tr>'+
             '<tr><td>Info:</td> <td><input type="text" id="address"/> </td> </tr>'+
-            '<tr><td></td><td><input type="button" value="Save" onclick="saveData()"/>'+
+            '<tr><td></td><td><input type="button" value="Save" onclick="saveData(this)"/>'+
             '<input type="button" value="Delete" onclick="deleteData()"/></td></tr>'+
             '<table>'+
-            '<div>';
+            '</div>';
 
         newMarker(event.latLng);
         newInfoWindow(newMarkerContentString);
@@ -201,8 +206,35 @@ function attachInfoWindow() {
     attachMessage(marker, nbrInfo);
 }
 
-function saveData() {
+function saveData(content) {
     console.log('saved!');
+    var index = content.parentNode.parentNode.parentNode.parentNode.parentNode.id;
+    console.log(index);
+
+    // get the marker and info window
+    marker = markers[index];
+    nbrInfo = nbrInfos[index];
+    console.log(nbrInfos);
+    console.log(nbrInfo);
+
+    infowindow.open(map,marker);
+    infowindow.setContent("Yo");
+
+    // nbrInfos.splice(0, 1);
+    // console.log(nbrInfos);
+
+    // nbrInfos.push(
+    //     new google.maps.InfoWindow({
+    //         content: contentString // add blah blah
+    //     })
+    // );
+
+    // nbrInfo.content = '<div></div>';
+
+    console.log(nbrInfo);
+    // infowindow.close();
+    // messagewindow.open(map, marker);
+
     // attach a bounce animation to the marker
     // attachBounce(marker);
 }
