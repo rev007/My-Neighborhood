@@ -156,11 +156,10 @@ function initMap() {
 
         // create some content for the next info window and assign it an index value
         newMarkerContentString =
-            '<div id="pizza">'+
             '<div id='+n.toString()+' class="info-window">'+
             '<table>'+
-            '<tr><td>Title:</td> <td><input type="text" id="name"/> </td> </tr>'+
-            '<tr><td>Info:</td> <td><input type="text" id="address"/> </td> </tr>'+
+            '<tr><td>Title:</td> <td><input type="text" id="title"/> </td> </tr>'+
+            '<tr><td>Info:</td> <td><input type="text" id="info"/> </td> </tr>'+
             '<tr><td></td><td><input type="button" value="Save" onclick="saveData(this)"/>'+
             '<input type="button" value="Delete" onclick="deleteData()"/></td></tr>'+
             '<table>'+
@@ -191,7 +190,7 @@ function newMarker(coordinates) {
 
 function newInfoWindow(contentString) {
     nbrInfos.push(
-        new google.maps.InfoWindow({
+            new google.maps.InfoWindow({
             content: contentString // add blah blah
         })
     );
@@ -209,32 +208,20 @@ function attachInfoWindow() {
 function saveData(content) {
     console.log('saved!');
     var index = content.parentNode.parentNode.parentNode.parentNode.parentNode.id;
-    console.log(index);
 
-    // get the marker and info window
-    marker = markers[index];
+    // get the info window
     nbrInfo = nbrInfos[index];
-    console.log(nbrInfos);
-    console.log(nbrInfo);
 
-    infowindow.open(map,marker);
-    infowindow.setContent("Yo");
+    var title = document.getElementById("title").value;
+    var info = document.getElementById("info").value;
 
-    // nbrInfos.splice(0, 1);
-    // console.log(nbrInfos);
+    // create some content for the info windows
+    banannaString =
+        '<h3>'+title+'</h3>'+
+        '<p>'+info+'</p>';
 
-    // nbrInfos.push(
-    //     new google.maps.InfoWindow({
-    //         content: contentString // add blah blah
-    //     })
-    // );
-
-    // nbrInfo.content = '<div></div>';
-
-    console.log(nbrInfo);
-    // infowindow.close();
-    // messagewindow.open(map, marker);
-
+    nbrInfo.setContent(banannaString);
+    
     // attach a bounce animation to the marker
     // attachBounce(marker);
 }
