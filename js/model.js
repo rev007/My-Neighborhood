@@ -33,7 +33,7 @@ var neighborhoodData = [
     {
         "id": "3",
         "title": "pothole",
-        "info": "massive pothole (damaged three wheels this season)",
+        "info": "massive pothole (damaged three tires this season)",
         "location": {
             "lat": "42.42553",
             "lng": "-71.67780"

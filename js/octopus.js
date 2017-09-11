@@ -82,7 +82,7 @@ ko.applyBindings(new nbrListViewModel(), element);
  MAP
  ========================================================================== */
 
-// this error will be called if something goes wrong with your Google map scripting from index.html
+// an error will be called if something goes wrong with your Google map scripting from index.html
 function googleError() {
     console.log('There is something wrong with your JavaScript!');
     alert('There was an issue with Neighborhood Map! Please contact customer support.'); // alert user
@@ -139,7 +139,6 @@ function initMap() {
             '<p>'+nbrData.info+'</p>';
 
         // create an info window for each object
-        // NOTE: creating an info window for each marker allowing the user to decide when to close it
         newInfoWindow(initialContentString); // add content from neighborhoodData (add photos later after they download)
         attachInfoWindow();
 
@@ -152,22 +151,41 @@ function initMap() {
     google.maps.event.addListener(neighborhoodOverlay, "click", function(event) {
 
         // determine the index of the next info window that will be created
-        n = nbrInfos.length;
+        // n = nbrInfos.length;
 
         // create some content for the next info window and assign it an index value
-        newMarkerContentString =
-            '<div id='+n.toString()+' class="info-window">'+
-            '<table>'+
-            '<tr><td>Title:</td> <td><input type="text" id="title"/> </td> </tr>'+
-            '<tr><td>Info:</td> <td><input type="text" id="info"/> </td> </tr>'+
-            '<tr><td></td><td><input type="button" value="Save" onclick="saveData(this)"/>'+
-            '<input type="button" value="Delete" onclick="deleteData()"/></td></tr>'+
-            '<table>'+
-            '</div>';
+        // newMarkerContentString =
+        //     '<div id='+n.toString()+' class="info-window">'+
+        //     '<table>'+
+        //     '<tr><td>Title:</td> <td><input type="text" id="title"/> </td> </tr>'+
+        //     '<tr><td>Info:</td> <td><input type="text" id="info"/> </td> </tr>'+
+        //     '<tr><td></td><td><input type="button" value="Save" onclick="saveData(this)"/>'+
+        //     '<input type="button" value="Delete" onclick="deleteData()"/></td></tr>'+
+        //     '<table>'+
+        //     '</div>';
 
         newMarker(event.latLng);
-        newInfoWindow(newMarkerContentString);
+        // newInfoWindow(newMarkerContentString);
+        newInfoWindow();
         attachInfoWindow();
+
+        var d = document.createElement('div');
+        d.innerHTML = newMarkerContentString;
+        // console.log(d.firstChild.firstChild.firstChild);
+        console.log(d);
+
+
+        // // We're creating a DOM element for the number
+        // var elem = document.createElement('div');
+        // elem.textContent = n;
+        //
+        // // ... and when we click, alert the value of `num`
+        // elem.addEventListener('click', (function(numCopy) {
+        //     return function() {
+        //         alert(numCopy);
+        //     };
+        // })(num));
+
 
     });
 
@@ -188,10 +206,46 @@ function newMarker(coordinates) {
     );
 }
 
+// function newInfoWindow(contentString) {
+//     nbrInfos.push(
+//             new google.maps.InfoWindow({
+//             content: contentString // add blah blah
+//         })
+//     );
+// }
+
 function newInfoWindow(contentString) {
+
+    if (!contentString) {
+        contentString =
+            '<div id="hi-mom" class="info-window">'+
+            '<table>'+
+            '<tr><td>Title:</td> <td><input type="text" id="title"/> </td> </tr>'+
+            '<tr><td>Info:</td> <td><input type="text" id="info"/> </td> </tr>'+
+            '<tr><td></td><td><input type="button" value="Save" onclick="saveData(this)"/>'+
+            '<input type="button" value="Delete" onclick="deleteData()"/></td></tr>'+
+            '<table>'+
+            '</div>';
+    }
+
     nbrInfos.push(
-            new google.maps.InfoWindow({
+        new google.maps.InfoWindow({
             content: contentString // add blah blah
+        })
+    );
+}
+
+function xnewInfoWindow() {
+    nbrInfos.push(
+        new google.maps.InfoWindow({
+            content:             '<div id="gizmo" class="info-window">'+
+            '<table>'+
+            '<tr><td>Title:</td> <td><input type="text" id="title"/> </td> </tr>'+
+            '<tr><td>Info:</td> <td><input type="text" id="info"/> </td> </tr>'+
+            '<tr><td></td><td><input type="button" value="Save" onclick="saveData(this)"/>'+
+            '<input type="button" value="Delete" onclick="deleteData()"/></td></tr>'+
+            '<table>'+
+            '</div>'
         })
     );
 }
@@ -207,6 +261,11 @@ function attachInfoWindow() {
 
 function saveData(content) {
     console.log('saved!');
+
+    console.log(content);
+    console.dir(content);
+
+
     var index = content.parentNode.parentNode.parentNode.parentNode.parentNode.id;
 
     // get the info window
@@ -220,8 +279,8 @@ function saveData(content) {
         '<h3>'+title+'</h3>'+
         '<p>'+info+'</p>';
 
-    nbrInfo.setContent(banannaString);
-    
+    // nbrInfo.setContent(banannaString);
+
     // attach a bounce animation to the marker
     // attachBounce(marker);
 }
