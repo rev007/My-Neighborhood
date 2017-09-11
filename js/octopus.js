@@ -150,46 +150,14 @@ function initMap() {
     // create a new marker whenever the neighborhood map is clicked
     google.maps.event.addListener(neighborhoodOverlay, "click", function(event) {
 
-        // determine the index of the next info window that will be created
-        // n = nbrInfos.length;
-
-        // create some content for the next info window and assign it an index value
-        // newMarkerContentString =
-        //     '<div id='+n.toString()+' class="info-window">'+
-        //     '<table>'+
-        //     '<tr><td>Title:</td> <td><input type="text" id="title"/> </td> </tr>'+
-        //     '<tr><td>Info:</td> <td><input type="text" id="info"/> </td> </tr>'+
-        //     '<tr><td></td><td><input type="button" value="Save" onclick="saveData(this)"/>'+
-        //     '<input type="button" value="Delete" onclick="deleteData()"/></td></tr>'+
-        //     '<table>'+
-        //     '</div>';
-
         newMarker(event.latLng);
-        // newInfoWindow(newMarkerContentString);
         newInfoWindow();
         attachInfoWindow();
-
-        var d = document.createElement('div');
-        d.innerHTML = newMarkerContentString;
-        // console.log(d.firstChild.firstChild.firstChild);
-        console.log(d);
-
-
-        // // We're creating a DOM element for the number
-        // var elem = document.createElement('div');
-        // elem.textContent = n;
-        //
-        // // ... and when we click, alert the value of `num`
-        // elem.addEventListener('click', (function(numCopy) {
-        //     return function() {
-        //         alert(numCopy);
-        //     };
-        // })(num));
-
 
     });
 
 }
+
 
 /* ==========================================================================
  TEST AREA do stuff here
@@ -206,19 +174,12 @@ function newMarker(coordinates) {
     );
 }
 
-// function newInfoWindow(contentString) {
-//     nbrInfos.push(
-//             new google.maps.InfoWindow({
-//             content: contentString // add blah blah
-//         })
-//     );
-// }
-
 function newInfoWindow(contentString) {
 
     if (!contentString) {
+        // add content if none was specified (such as in a new marker)
         contentString =
-            '<div id="hi-mom" class="info-window">'+
+            '<div id="gizmo" class="info-window">'+
             '<table>'+
             '<tr><td>Title:</td> <td><input type="text" id="title"/> </td> </tr>'+
             '<tr><td>Info:</td> <td><input type="text" id="info"/> </td> </tr>'+
@@ -231,21 +192,6 @@ function newInfoWindow(contentString) {
     nbrInfos.push(
         new google.maps.InfoWindow({
             content: contentString // add blah blah
-        })
-    );
-}
-
-function xnewInfoWindow() {
-    nbrInfos.push(
-        new google.maps.InfoWindow({
-            content:             '<div id="gizmo" class="info-window">'+
-            '<table>'+
-            '<tr><td>Title:</td> <td><input type="text" id="title"/> </td> </tr>'+
-            '<tr><td>Info:</td> <td><input type="text" id="info"/> </td> </tr>'+
-            '<tr><td></td><td><input type="button" value="Save" onclick="saveData(this)"/>'+
-            '<input type="button" value="Delete" onclick="deleteData()"/></td></tr>'+
-            '<table>'+
-            '</div>'
         })
     );
 }
