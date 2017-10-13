@@ -8,11 +8,13 @@ HOW TO RUN
 
 ### Getting started
 
-1. Your neighborhood map has customized points of interest
+1. The neighborhood map has customized points of interest
 2. Click on a marker (or a list item) to display information
 3. Use the search box to show just the points you want to see
-4. To get Instagram photos into your markers, set the caption text of your
-   Instagram photo to be identical to the marker's title
+4. Photos are linked to the markers through an Instagram account by setting the
+	 caption text of the marker to be identical to an Instagram photo's title.
+	 
+5. Please note, this is a prototype and was created for demonstration purposes only
 
 ### Credits
 

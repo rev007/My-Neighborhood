@@ -5,8 +5,8 @@ var neighborhoodData = [
         "title": "Tootie's house",
         "info": "Nabisco lives here too!",
         "location": {
-            "lat": "42.42540",
-            "lng": "-71.67558"
+            "lat": "42.42545",
+            "lng": "-71.67560"
         },
         "show": "true"
     },
@@ -15,7 +15,7 @@ var neighborhoodData = [
         "title": "beehive",
         "info": "docile honeybees",
         "location": {
-            "lat": "42.42565",
+            "lat": "42.42570",
             "lng": "-71.67576"
         },
         "show": "true"
@@ -25,7 +25,7 @@ var neighborhoodData = [
         "title": "lemonade stand",
         "info": "ice cold, 100% pure sugar cane lemonade!",
         "location": {
-            "lat": "42.42594",
+            "lat": "42.42600",
             "lng": "-71.67669"
         },
         "show": "true"
@@ -35,7 +35,7 @@ var neighborhoodData = [
         "title": "pothole",
         "info": "massive pothole (damaged three tires this season)",
         "location": {
-            "lat": "42.42553",
+            "lat": "42.42557",
             "lng": "-71.67780"
         },
         "show": "true"
@@ -45,8 +45,8 @@ var neighborhoodData = [
         "title": "blueberry bush",
         "info": "delicious wild blueberries are growing here",
         "location": {
-            "lat": "42.42641",
-            "lng": "-71.67719"
+            "lat": "42.42651",
+            "lng": "-71.67718"
         },
         "show": "true"
     }

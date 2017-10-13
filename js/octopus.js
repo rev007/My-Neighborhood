@@ -100,7 +100,7 @@ function initMap() {
 
     var neighborhood = {lat: 42.42580, lng: -71.67593};
     map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 18,
+        zoom: 19,
         center: neighborhood
     });
 
@@ -113,7 +113,7 @@ function initMap() {
 
     // add the neighborhood image to the map
     var neighborhoodOverlay = new google.maps.GroundOverlay(
-        'img/neighborhood2x.png',
+        'img/neighborhood.svg',
         imageBounds);
     neighborhoodOverlay.setMap(map);
 
