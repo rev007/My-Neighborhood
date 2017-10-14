@@ -18,7 +18,7 @@ HOW TO RUN
 
 ### Credits
 
-Multiple code segments adapted from Google examples showing how to use the API.
-Multiple code segments adapted from KnockoutJS showing how to use the API.
-Multiple code segments adapted from contributions on Stack Overflow.
+Multiple code segments adapted from Google examples showing how to use the API.  
+Multiple code segments adapted from KnockoutJS showing how to use the API.  
+Multiple code segments adapted from contributions on Stack Overflow.  
 Misha Rudrastyh for how to retrieve photos from Instagram.
