@@ -2,15 +2,19 @@
 GENERAL
 *********************/
 
+* {
+	box-sizing: border-box;
+}
+
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    font-size: .5em;
+    background-color: #fbdb92;
 }
 
-p {
-    margin: 1em auto;
+li {
+  width: 40%;
 }
 
 /*********************
@@ -19,7 +23,8 @@ KNOCKOUT
 
 #knockout {
     /*height: 35%;*/
-    height: 28%;
+    /*height: 28%;*/
+    /*height: 100%;*/
 }
 
 /*********************
@@ -27,12 +32,11 @@ SEARCH BOX
 *********************/
 
 #search {
-    height: 10%;
     background-image: url(../img/search.svg);
     background-repeat: no-repeat;
     background-size: 15px 15px;
     padding: 0 0 0 30px;
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 /*********************
@@ -40,8 +44,22 @@ LIST
 *********************/
 
 #list {
-    height: 50%;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /*list-style-position: inside;*/
+}
+
+.zork {
+  height: 50%;
+  padding-top: 10px;
+}
+
+.pizza {
+  height: 50%;
+  border: dotted;
+  overflow-y: scroll; /* content is not clipped */
 }
 
 /*********************
@@ -57,8 +75,8 @@ MAP
 *********************/
 
 #map {
-    height: 70%;
-    width: 100%;
+    /*height: 70%;*/
+    /*width: 100%;*/
     background-color: grey;
 }
 
@@ -69,4 +87,3 @@ MAP
 .info-window {
     background-color: yellow;
 }
-

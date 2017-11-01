@@ -1,0 +1,8 @@
+
+.grid {
+  height: 100%; /* need this so map can calculate its own height using percent */
+  /*max-width: 800px;*/
+  display: grid;
+  /*grid-template-rows: 200px 400px;*/
+  grid-template-rows: 30% 70%;
+}
