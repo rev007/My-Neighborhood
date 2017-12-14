@@ -52,12 +52,12 @@ LIST
 }
 
 .zork {
-  height: 50%;
+  height: 40%;
   padding-top: 10px;
 }
 
 .pizza {
-  height: 50%;
+  height: 60%;
   border: dotted;
   overflow-y: scroll; /* content is not clipped */
 }

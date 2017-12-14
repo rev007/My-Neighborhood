@@ -1,0 +1,21 @@
+.zork {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+@media screen and (min-width: 500px) {
+
+  .zork {
+    flex-direction: row;
+    /*justify-content: space-between;*/
+    justify-content: flex-start;
+  }
+
+}
