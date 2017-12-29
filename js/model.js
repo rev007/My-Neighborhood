@@ -1,5 +1,5 @@
 // TODO: put this on the server and load it in
-var neighborhoodData = [
+const neighborhoodData = [
     {
         "id": "0",
         "title": "Tootie's house",

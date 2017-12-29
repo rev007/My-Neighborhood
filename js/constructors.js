@@ -1,5 +1,5 @@
 // neighborhood data constructor
-var NbrData = function(data) {
+const NbrData = function(data) {
     this.id = data.id;
     this.title = data.title;
     this.info = data.info;
@@ -8,7 +8,7 @@ var NbrData = function(data) {
 };
 
 // photo constructor
-var Photo = function(data) {
+const Photo = function(data) {
     this.url = '<img src="'+data.images.low_resolution.url+'" alt="Instagram photo" width="100" height="100">';
     this.caption = data.caption.text;
 };

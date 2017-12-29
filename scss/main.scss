@@ -1,0 +1,89 @@
+/*********************
+GENERAL
+*********************/
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #fbdb92;
+}
+
+li {
+  width: 40%;
+}
+
+/*********************
+KNOCKOUT
+*********************/
+
+#knockout {
+    /*height: 35%;*/
+    /*height: 28%;*/
+    /*height: 100%;*/
+}
+
+/*********************
+SEARCH BOX
+*********************/
+
+#search {
+    background-image: url(../img/search.svg);
+    background-repeat: no-repeat;
+    background-size: 15px 15px;
+    padding: 0 0 0 30px;
+    /*margin-top: 10px;*/
+}
+
+/*********************
+LIST
+*********************/
+
+#list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /*list-style-position: inside;*/
+}
+
+.zork {
+  height: 40%;
+  padding-top: 10px;
+}
+
+.pizza {
+  height: 60%;
+  border: dotted;
+  overflow-y: scroll; /* content is not clipped */
+}
+
+/*********************
+MAP TITLE
+*********************/
+#map-title {
+    height: 10%;
+    margin: 0 auto;
+}
+
+/*********************
+MAP
+*********************/
+
+#map {
+    /*height: 70%;*/
+    /*width: 100%;*/
+    background-color: grey;
+}
+
+/*********************
+MAP
+*********************/
+
+.info-window {
+    background-color: yellow;
+}
